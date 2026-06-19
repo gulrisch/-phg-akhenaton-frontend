@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catalogue — PHG AKHENATON IA</title>
+  <title>Catalogue â€” PHG AKHENATON IA</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/main.css">
 </head>
@@ -11,7 +11,7 @@
 
 <nav class="navbar">
   <a href="../index.html" class="logo">
-    <span class="logo-symbol">𓂀</span> PHG AKHENATON IA
+    <span class="logo-symbol">ð“‚€</span> PHG AKHENATON IA
     <small>GULRISCH EMPIRE</small>
   </a>
   <ul class="nav-links">
@@ -27,17 +27,17 @@
 
 <div class="page-header">
   <h1>CATALOGUE</h1>
-  <p>Toutes les œuvres numériques africaines francophones</p>
+  <p>Toutes les Å“uvres numÃ©riques africaines francophones</p>
 </div>
 
 <div class="filters">
   <button class="filter-btn active" onclick="filterBy('all', this)">TOUT</button>
   <button class="filter-btn" onclick="filterBy('roman', this)">ROMAN</button>
   <button class="filter-btn" onclick="filterBy('business', this)">BUSINESS</button>
-  <button class="filter-btn" onclick="filterBy('developpement', this)">DÉVELOPPEMENT</button>
-  <button class="filter-btn" onclick="filterBy('poesie', this)">POÉSIE</button>
+  <button class="filter-btn" onclick="filterBy('developpement', this)">DÃ‰VELOPPEMENT</button>
+  <button class="filter-btn" onclick="filterBy('poesie', this)">POÃ‰SIE</button>
   <button class="filter-btn" onclick="filterBy('spirituel', this)">SPIRITUEL</button>
-  <input class="filter-search" type="text" placeholder="Rechercher une œuvre..." oninput="searchBooks(this.value)">
+  <input class="filter-search" type="text" placeholder="Rechercher une Å“uvre..." oninput="searchBooks(this.value)">
 </div>
 
 <section class="catalogue-section">
@@ -48,15 +48,123 @@
 
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
   <div class="modal" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModal()">✕</button>
+    <button class="modal-close" onclick="closeModal()">âœ•</button>
     <div id="modal-content"></div>
   </div>
 </div>
 
-<script src="../js/config.js"></script>
-<script src="../js/api.js"></script>
-<script src="../js/auth.js"></script>
-<script src="../js/main.js"></script>
+<script src="../js/config.js">    function renderBookCard(book) {
+      const amazon = book.lien_amazon || book.lienAmazon || `https://www.amazon.fr/s?k=${encodeURIComponent((book.titre||'') + ' Goulia')}`;
+      return `<div class="book-card" style="cursor:pointer;border:1px solid rgba(212,168,50,0.3);border-radius:12px;padding:1.5rem;background:#111;color:#fff;">
+        <div style="font-size:3rem;text-align:center;margin-bottom:1rem;">📖</div>
+        <h3 style="color:#C9A84C;font-family:Cinzel,serif;margin-bottom:0.5rem;font-size:1rem;">${book.titre||book.title||'Sans titre'}</h3>
+        <p style="color:#aaa;font-size:0.85rem;margin-bottom:0.5rem;">${book.auteur||book.author||'PHG Éditions'}</p>
+        <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">${book.description||''}</p>
+        <p style="color:#C9A84C;font-weight:bold;margin-bottom:1rem;">${book.prix||book.price||''}</p>
+        <a href="${amazon}" target="_blank" style="display:block;text-align:center;background:#C9A84C;color:#000;padding:0.6rem;border-radius:6px;text-decoration:none;font-weight:bold;">Voir sur Amazon</a>
+      </div>`;
+    }
+
+    function renderDefaultBooks() {
+      const livres = [
+        {titre:"Les 48 Lois de Zarek l'Archiviste", auteur:"Frédéric Richard Goulia", prix:"6,02 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
+        {titre:"De Rien à la Liberté", auteur:"Frédéric Richard Goulia", prix:"7,76 €", lienAmazon:"https://www.amazon.fr/dp/B0GVZM1FX9"},
+        {titre:"Le Figuier de Canaan", auteur:"Frédéric Richard Goulia", prix:"5,16 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
+        {titre:"La Manifestation de l'Explosion de ma Vie Financière", auteur:"Frédéric Richard Goulia", prix:"18,16 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"},
+        {titre:"Le Dernier Pauvre de la Famille", auteur:"Frédéric Richard Goulia", prix:"13,48 €", lienAmazon:"https://www.amazon.fr/dp/B0H1RTKSKG"},
+        {titre:"L'Eldorado des Ombres", auteur:"Frédéric Richard Goulia", prix:"9,99 €", lienAmazon:"https://www.amazon.fr/dp/B0H1V2WDYC"},
+        {titre:"Le Grand Secret", auteur:"Frédéric Richard Goulia", prix:"5,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GVHH3KZ8"},
+        {titre:"La Violence Humaine", auteur:"Frédéric Richard Goulia", prix:"8,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GW643C9N"},
+        {titre:"L'Afrique et la Civilisation du Futur", auteur:"Frédéric Richard Goulia", prix:"14,99 €", lienAmazon:"https://www.amazon.fr/s?k=Afrique+Civilisation+Futur+Goulia"},
+        {titre:"La Loi de la Semence", auteur:"Frédéric Richard Goulia", prix:"21,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"}
+      ];
+      return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">${livres.map(renderBookCard).join('')}</div>`;
+    }
+</script>
+<script src="../js/api.js">    function renderBookCard(book) {
+      const amazon = book.lien_amazon || book.lienAmazon || `https://www.amazon.fr/s?k=${encodeURIComponent((book.titre||'') + ' Goulia')}`;
+      return `<div class="book-card" style="cursor:pointer;border:1px solid rgba(212,168,50,0.3);border-radius:12px;padding:1.5rem;background:#111;color:#fff;">
+        <div style="font-size:3rem;text-align:center;margin-bottom:1rem;">📖</div>
+        <h3 style="color:#C9A84C;font-family:Cinzel,serif;margin-bottom:0.5rem;font-size:1rem;">${book.titre||book.title||'Sans titre'}</h3>
+        <p style="color:#aaa;font-size:0.85rem;margin-bottom:0.5rem;">${book.auteur||book.author||'PHG Éditions'}</p>
+        <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">${book.description||''}</p>
+        <p style="color:#C9A84C;font-weight:bold;margin-bottom:1rem;">${book.prix||book.price||''}</p>
+        <a href="${amazon}" target="_blank" style="display:block;text-align:center;background:#C9A84C;color:#000;padding:0.6rem;border-radius:6px;text-decoration:none;font-weight:bold;">Voir sur Amazon</a>
+      </div>`;
+    }
+
+    function renderDefaultBooks() {
+      const livres = [
+        {titre:"Les 48 Lois de Zarek l'Archiviste", auteur:"Frédéric Richard Goulia", prix:"6,02 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
+        {titre:"De Rien à la Liberté", auteur:"Frédéric Richard Goulia", prix:"7,76 €", lienAmazon:"https://www.amazon.fr/dp/B0GVZM1FX9"},
+        {titre:"Le Figuier de Canaan", auteur:"Frédéric Richard Goulia", prix:"5,16 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
+        {titre:"La Manifestation de l'Explosion de ma Vie Financière", auteur:"Frédéric Richard Goulia", prix:"18,16 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"},
+        {titre:"Le Dernier Pauvre de la Famille", auteur:"Frédéric Richard Goulia", prix:"13,48 €", lienAmazon:"https://www.amazon.fr/dp/B0H1RTKSKG"},
+        {titre:"L'Eldorado des Ombres", auteur:"Frédéric Richard Goulia", prix:"9,99 €", lienAmazon:"https://www.amazon.fr/dp/B0H1V2WDYC"},
+        {titre:"Le Grand Secret", auteur:"Frédéric Richard Goulia", prix:"5,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GVHH3KZ8"},
+        {titre:"La Violence Humaine", auteur:"Frédéric Richard Goulia", prix:"8,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GW643C9N"},
+        {titre:"L'Afrique et la Civilisation du Futur", auteur:"Frédéric Richard Goulia", prix:"14,99 €", lienAmazon:"https://www.amazon.fr/s?k=Afrique+Civilisation+Futur+Goulia"},
+        {titre:"La Loi de la Semence", auteur:"Frédéric Richard Goulia", prix:"21,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"}
+      ];
+      return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">${livres.map(renderBookCard).join('')}</div>`;
+    }
+</script>
+<script src="../js/auth.js">    function renderBookCard(book) {
+      const amazon = book.lien_amazon || book.lienAmazon || `https://www.amazon.fr/s?k=${encodeURIComponent((book.titre||'') + ' Goulia')}`;
+      return `<div class="book-card" style="cursor:pointer;border:1px solid rgba(212,168,50,0.3);border-radius:12px;padding:1.5rem;background:#111;color:#fff;">
+        <div style="font-size:3rem;text-align:center;margin-bottom:1rem;">📖</div>
+        <h3 style="color:#C9A84C;font-family:Cinzel,serif;margin-bottom:0.5rem;font-size:1rem;">${book.titre||book.title||'Sans titre'}</h3>
+        <p style="color:#aaa;font-size:0.85rem;margin-bottom:0.5rem;">${book.auteur||book.author||'PHG Éditions'}</p>
+        <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">${book.description||''}</p>
+        <p style="color:#C9A84C;font-weight:bold;margin-bottom:1rem;">${book.prix||book.price||''}</p>
+        <a href="${amazon}" target="_blank" style="display:block;text-align:center;background:#C9A84C;color:#000;padding:0.6rem;border-radius:6px;text-decoration:none;font-weight:bold;">Voir sur Amazon</a>
+      </div>`;
+    }
+
+    function renderDefaultBooks() {
+      const livres = [
+        {titre:"Les 48 Lois de Zarek l'Archiviste", auteur:"Frédéric Richard Goulia", prix:"6,02 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
+        {titre:"De Rien à la Liberté", auteur:"Frédéric Richard Goulia", prix:"7,76 €", lienAmazon:"https://www.amazon.fr/dp/B0GVZM1FX9"},
+        {titre:"Le Figuier de Canaan", auteur:"Frédéric Richard Goulia", prix:"5,16 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
+        {titre:"La Manifestation de l'Explosion de ma Vie Financière", auteur:"Frédéric Richard Goulia", prix:"18,16 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"},
+        {titre:"Le Dernier Pauvre de la Famille", auteur:"Frédéric Richard Goulia", prix:"13,48 €", lienAmazon:"https://www.amazon.fr/dp/B0H1RTKSKG"},
+        {titre:"L'Eldorado des Ombres", auteur:"Frédéric Richard Goulia", prix:"9,99 €", lienAmazon:"https://www.amazon.fr/dp/B0H1V2WDYC"},
+        {titre:"Le Grand Secret", auteur:"Frédéric Richard Goulia", prix:"5,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GVHH3KZ8"},
+        {titre:"La Violence Humaine", auteur:"Frédéric Richard Goulia", prix:"8,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GW643C9N"},
+        {titre:"L'Afrique et la Civilisation du Futur", auteur:"Frédéric Richard Goulia", prix:"14,99 €", lienAmazon:"https://www.amazon.fr/s?k=Afrique+Civilisation+Futur+Goulia"},
+        {titre:"La Loi de la Semence", auteur:"Frédéric Richard Goulia", prix:"21,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"}
+      ];
+      return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">${livres.map(renderBookCard).join('')}</div>`;
+    }
+</script>
+<script src="../js/main.js">    function renderBookCard(book) {
+      const amazon = book.lien_amazon || book.lienAmazon || `https://www.amazon.fr/s?k=${encodeURIComponent((book.titre||'') + ' Goulia')}`;
+      return `<div class="book-card" style="cursor:pointer;border:1px solid rgba(212,168,50,0.3);border-radius:12px;padding:1.5rem;background:#111;color:#fff;">
+        <div style="font-size:3rem;text-align:center;margin-bottom:1rem;">📖</div>
+        <h3 style="color:#C9A84C;font-family:Cinzel,serif;margin-bottom:0.5rem;font-size:1rem;">${book.titre||book.title||'Sans titre'}</h3>
+        <p style="color:#aaa;font-size:0.85rem;margin-bottom:0.5rem;">${book.auteur||book.author||'PHG Éditions'}</p>
+        <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">${book.description||''}</p>
+        <p style="color:#C9A84C;font-weight:bold;margin-bottom:1rem;">${book.prix||book.price||''}</p>
+        <a href="${amazon}" target="_blank" style="display:block;text-align:center;background:#C9A84C;color:#000;padding:0.6rem;border-radius:6px;text-decoration:none;font-weight:bold;">Voir sur Amazon</a>
+      </div>`;
+    }
+
+    function renderDefaultBooks() {
+      const livres = [
+        {titre:"Les 48 Lois de Zarek l'Archiviste", auteur:"Frédéric Richard Goulia", prix:"6,02 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
+        {titre:"De Rien à la Liberté", auteur:"Frédéric Richard Goulia", prix:"7,76 €", lienAmazon:"https://www.amazon.fr/dp/B0GVZM1FX9"},
+        {titre:"Le Figuier de Canaan", auteur:"Frédéric Richard Goulia", prix:"5,16 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
+        {titre:"La Manifestation de l'Explosion de ma Vie Financière", auteur:"Frédéric Richard Goulia", prix:"18,16 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"},
+        {titre:"Le Dernier Pauvre de la Famille", auteur:"Frédéric Richard Goulia", prix:"13,48 €", lienAmazon:"https://www.amazon.fr/dp/B0H1RTKSKG"},
+        {titre:"L'Eldorado des Ombres", auteur:"Frédéric Richard Goulia", prix:"9,99 €", lienAmazon:"https://www.amazon.fr/dp/B0H1V2WDYC"},
+        {titre:"Le Grand Secret", auteur:"Frédéric Richard Goulia", prix:"5,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GVHH3KZ8"},
+        {titre:"La Violence Humaine", auteur:"Frédéric Richard Goulia", prix:"8,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GW643C9N"},
+        {titre:"L'Afrique et la Civilisation du Futur", auteur:"Frédéric Richard Goulia", prix:"14,99 €", lienAmazon:"https://www.amazon.fr/s?k=Afrique+Civilisation+Futur+Goulia"},
+        {titre:"La Loi de la Semence", auteur:"Frédéric Richard Goulia", prix:"21,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"}
+      ];
+      return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">${livres.map(renderBookCard).join('')}</div>`;
+    }
+</script>
 <script>
   let allBooks = [];
   let currentFilter = 'all';
@@ -94,11 +202,40 @@
   function renderGrid(books) {
     const grid = document.getElementById('books-grid');
     if (!books.length) {
-      grid.innerHTML = '<div class="loading-placeholder">Aucune œuvre trouvée.</div>';
+      grid.innerHTML = '<div class="loading-placeholder">Aucune Å“uvre trouvÃ©e.</div>';
       return;
     }
     grid.innerHTML = books.map(renderBookCard).join('');
   }
+    function renderBookCard(book) {
+      const amazon = book.lien_amazon || book.lienAmazon || `https://www.amazon.fr/s?k=${encodeURIComponent((book.titre||'') + ' Goulia')}`;
+      return `<div class="book-card" style="cursor:pointer;border:1px solid rgba(212,168,50,0.3);border-radius:12px;padding:1.5rem;background:#111;color:#fff;">
+        <div style="font-size:3rem;text-align:center;margin-bottom:1rem;">📖</div>
+        <h3 style="color:#C9A84C;font-family:Cinzel,serif;margin-bottom:0.5rem;font-size:1rem;">${book.titre||book.title||'Sans titre'}</h3>
+        <p style="color:#aaa;font-size:0.85rem;margin-bottom:0.5rem;">${book.auteur||book.author||'PHG Éditions'}</p>
+        <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">${book.description||''}</p>
+        <p style="color:#C9A84C;font-weight:bold;margin-bottom:1rem;">${book.prix||book.price||''}</p>
+        <a href="${amazon}" target="_blank" style="display:block;text-align:center;background:#C9A84C;color:#000;padding:0.6rem;border-radius:6px;text-decoration:none;font-weight:bold;">Voir sur Amazon</a>
+      </div>`;
+    }
+
+    function renderDefaultBooks() {
+      const livres = [
+        {titre:"Les 48 Lois de Zarek l'Archiviste", auteur:"Frédéric Richard Goulia", prix:"6,02 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
+        {titre:"De Rien à la Liberté", auteur:"Frédéric Richard Goulia", prix:"7,76 €", lienAmazon:"https://www.amazon.fr/dp/B0GVZM1FX9"},
+        {titre:"Le Figuier de Canaan", auteur:"Frédéric Richard Goulia", prix:"5,16 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
+        {titre:"La Manifestation de l'Explosion de ma Vie Financière", auteur:"Frédéric Richard Goulia", prix:"18,16 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"},
+        {titre:"Le Dernier Pauvre de la Famille", auteur:"Frédéric Richard Goulia", prix:"13,48 €", lienAmazon:"https://www.amazon.fr/dp/B0H1RTKSKG"},
+        {titre:"L'Eldorado des Ombres", auteur:"Frédéric Richard Goulia", prix:"9,99 €", lienAmazon:"https://www.amazon.fr/dp/B0H1V2WDYC"},
+        {titre:"Le Grand Secret", auteur:"Frédéric Richard Goulia", prix:"5,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GVHH3KZ8"},
+        {titre:"La Violence Humaine", auteur:"Frédéric Richard Goulia", prix:"8,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GW643C9N"},
+        {titre:"L'Afrique et la Civilisation du Futur", auteur:"Frédéric Richard Goulia", prix:"14,99 €", lienAmazon:"https://www.amazon.fr/s?k=Afrique+Civilisation+Futur+Goulia"},
+        {titre:"La Loi de la Semence", auteur:"Frédéric Richard Goulia", prix:"21,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"}
+      ];
+      return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">${livres.map(renderBookCard).join('')}</div>`;
+    }
 </script>
 </body>
 </html>
+
+
