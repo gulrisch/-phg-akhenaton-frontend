@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Auteur — PHG AKHENATON IA</title>
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+.dashboard { padding-top: 90px; min-height: 100vh; background: #0a0a0a; }
+.dash-header { background: #111; border-bottom: 1px solid rgba(212,168,50,0.15); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+.dash-header h1 { font-family: 'Cinzel', serif; color: #d4a832; font-size: 1.3rem; }
+.dash-body { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 3rem; }
+.stat-card { background: #111; border: 1px solid rgba(212,168,50,0.15); border-radius: 12px; padding: 1.5rem; }
+.stat-card .stat-label { font-size: 0.78rem; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem; }
+.stat-card .stat-value { font-family: 'Cinzel', serif; font-size: 2rem; color: #d4a832; }
+.stat-card .stat-sub { font-size: 0.78rem; color: #666; margin-top: 0.25rem; }
+.section-title { font-family: 'Cinzel', serif; color: #d4a832; font-size: 1.1rem; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(212,168,50,0.15); }
+.oeuvres-table { width: 100%; border-collapse: collapse; margin-bottom: 3rem; }
+.oeuvres-table th { text-align: left; font-size: 0.78rem; color: #888; letter-spacing: 1px; padding: 0.75rem; border-bottom: 1px solid rgba(212,168,50,0.15); }
+.oeuvres-table td { padding: 1rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; color: #ccc; }
+.oeuvres-table tr:hover td { background: rgba(212,168,50,0.03); }
+.badge-ia { background: rgba(212,168,50,0.1); color: #d4a832; border: 1px solid rgba(212,168,50,0.3); border-radius: 4px; font-size: 0.7rem; padding: 0.15rem 0.4rem; }
+.upload-zone { background: #111; border: 2px dashed rgba(212,168,50,0.25); border-radius: 16px; padding: 3rem; text-align: center; margin-bottom: 3rem; cursor: pointer; transition: border-color 0.3s; }
+.upload-zone:hover { border-color: #d4a832; }
+.upload-icon { font-size: 3rem; margin-bottom: 1rem; }
+.upload-zone h3 { font-family: 'Cinzel', serif; color: #d4a832; margin-bottom: 0.5rem; }
+.upload-zone p { color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.btn-upload { background: #d4a832; color: #0a0a0a; border: none; border-radius: 8px; padding: 0.75rem 2rem; font-weight: 600; cursor: pointer; font-size: 0.95rem; }
+.logout { background: transparent; border: 1px solid rgba(212,168,50,0.3); color: #d4a832; border-radius: 8px; padding: 0.5rem 1rem; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; }
+.logout:hover { background: rgba(212,168,50,0.1); }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo">
+      <span class="logo-eye">𓂀</span>
+      <div class="logo-text">
+        <span class="logo-title">PHG AKHENATON IA</span>
+        <span class="logo-sub">DASHBOARD AUTEUR</span>
+      </div>
+    </div>
+    <button class="logout" onclick="logout()">Déconnexion</button>
+  </div>
+</nav>
+
+<div class="dashboard">
+  <div class="dash-header">
+    <h1 id="dash-welcome">Tableau de bord</h1>
+    <span id="dash-plan" style="color:#d4a832; font-size:0.85rem;"></span>
+  </div>
+  <div class="dash-body">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Oeuvres publiées</div>
+        <div class="stat-value" id="s-oeuvres">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Ventes totales</div>
+        <div class="stat-value" id="s-ventes">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Revenus</div>
+        <div class="stat-value" id="s-revenus">—</div>
+        <div class="stat-sub">après commission 20%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Vues totales</div>
+        <div class="stat-value" id="s-vues">—</div>
+      </div>
+    </div>
+
+    <div class="section-title">Mes Oeuvres</div>
+    <table class="oeuvres-table">
+      <thead>
+        <tr>
+          <th>TITRE</th><th>CATEGORIE</th><th>PRIX</th><th>VENTES</th><th>VUES</th><th>IA</th>
+        </tr>
+      </thead>
+      <tbody id="oeuvres-tbody">
+        <tr><td colspan="6" style="text-align:center;color:#888;padding:2rem;">Chargement...</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Publier une Nouvelle Oeuvre</div>
+    <div class="upload-zone" onclick="document.getElementById('upload-form').scrollIntoView()">
+      <div class="upload-icon">📤</div>
+      <h3>Déposer votre oeuvre</h3>
+      <p>PDF, ePub, MP3, MP4 — stockage Cloudflare R2 sécurisé</p>
+      <button class="btn-upload">Commencer la publication</button>
+    </div>
+
+    <div class="section-title">Publier</div>
+    <div id="upload-form" style="background:#111;border:1px solid rgba(212,168,50,0.2);border-radius:16px;padding:2rem;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+        <div>
+          <label style="font-size:0.85rem;color:#ccc;display:block;margin-bottom:0.4rem;">Titre</label>
+          <input type="text" id="f-titre" placeholder="Titre de l'oeuvre" style="width:100%;background:#1a1a1a;border:1px solid rgba(212,168,50,0.2);border-radius:8px;padding:0.7rem 1rem;color:#fff;font-size:0.9rem;outline:none;">
+        </div>
+        <div>
+          <label style="font-size:0.85rem;color:#ccc;display:block;margin-bottom:0.4rem;">Prix (EUR)</label>
+          <input type="number" id="f-prix" placeholder="9.99" step="0.01" style="width:100%;background:#1a1a1a;border:1px solid rgba(212,168,50,0.2);border-radius:8px;padding:0.7rem 1rem;color:#fff;font-size:0.9rem;outline:none;">
+        </div>
+      </div>
+      <div style="margin-bottom:1rem;">
+        <label style="font-size:0.85rem;color:#ccc;display:block;margin-bottom:0.4rem;">Description</label>
+        <textarea id="f-desc" rows="3" placeholder="Description de l'oeuvre..." style="width:100%;background:#1a1a1a;border:1px solid rgba(212,168,50,0.2);border-radius:8px;padding:0.7rem 1rem;color:#fff;font-size:0.9rem;outline:none;resize:vertical;font-family:Inter,sans-serif;"></textarea>
+      </div>
+      <p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Upload des fichiers via l'API — connectez-vous et utilisez POST /oeuvres/ avec vos fichiers.</p>
+      <button class="btn-upload" onclick="publier()">Publier l'oeuvre</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API_URL = 'https://phg-akhenaton-ia.up.railway.app';
+const token = localStorage.getItem('token');
+const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+if (!token) window.location = 'login.html';
+
+document.getElementById('dash-welcome').textContent = 'Bienvenue, ' + (user.nom || 'Auteur');
+
+async function chargerDashboard() {
+  try {
+    const res = await fetch(API_URL + '/commissions/dashboard', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    document.getElementById('s-oeuvres').textContent = data.oeuvres;
+    document.getElementById('s-ventes').textContent = data.total_ventes;
+    document.getElementById('s-revenus').textContent = data.revenus_total.toFixed(2) + ' EUR';
+    document.getElementById('s-vues').textContent = data.total_vues;
+    const tbody = document.getElementById('oeuvres-tbody');
+    if (data.catalogue.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#888;padding:2rem;">Aucune oeuvre publiée</td></tr>';
+    } else {
+      tbody.innerHTML = data.catalogue.map(function(o) {
+        return '<tr><td>' + o.titre + '</td><td>—</td><td>' + o.prix + ' EUR</td><td>' + o.ventes + '</td><td>' + o.vues + '</td><td><span class="badge-ia">IA</span></td></tr>';
+      }).join('');
+    }
+  } catch(e) {
+    document.getElementById('oeuvres-tbody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:#888;">API non disponible</td></tr>';
+  }
+}
+
+async function publier() {
+  alert('Publication : utilisez POST /oeuvres/ via Postman ou intégration directe. Fonctionnalité UI en cours.');
+}
+
+function logout() {
+  localStorage.clear();
+  window.location = '../index.html';
+}
+
+chargerDashboard();
+</script>
+</body>
+</html>

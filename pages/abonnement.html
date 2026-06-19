@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publier — PHG AKHENATON IA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="logo">
+    <span class="logo-symbol">𓂀</span> PHG AKHENATON IA
+    <small>GULRISCH EMPIRE</small>
+  </a>
+  <ul class="nav-links">
+    <li><a href="catalogue.html">Catalogue</a></li>
+    <li><a href="abonnement.html">Publier</a></li>
+  </ul>
+  <div class="nav-actions" id="nav-actions">
+    <button class="btn-outline" onclick="openModal('login')">Connexion</button>
+    <button class="btn-gold" onclick="openModal('register')">Commencer</button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>PUBLIEZ VOS ŒUVRES</h1>
+  <p>Rejoignez la marketplace numérique africaine francophone</p>
+</div>
+
+<section style="padding:4rem 2rem;max-width:800px;margin:0 auto">
+  <div style="text-align:center;margin-bottom:3rem">
+    <p style="font-size:0.75rem;color:var(--text-muted);letter-spacing:4px;margin-bottom:1rem">COMMENT ÇA MARCHE</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem">
+      <div style="text-align:center">
+        <div style="font-size:2rem;color:var(--gold);margin-bottom:0.8rem">①</div>
+        <h3 style="font-size:0.75rem;letter-spacing:2px;margin-bottom:0.5rem">CRÉEZ UN COMPTE</h3>
+        <p style="font-size:0.75rem;color:var(--text-muted)">Inscription gratuite. Choisissez le statut Auteur.</p>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:2rem;color:var(--gold);margin-bottom:0.8rem">②</div>
+        <h3 style="font-size:0.75rem;letter-spacing:2px;margin-bottom:0.5rem">SOUSCRIVEZ UN PLAN</h3>
+        <p style="font-size:0.75rem;color:var(--text-muted)">Starter ou Pro. Paiement sécurisé via Stripe.</p>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:2rem;color:var(--gold);margin-bottom:0.8rem">③</div>
+        <h3 style="font-size:0.75rem;letter-spacing:2px;margin-bottom:0.5rem">PUBLIEZ & VENDEZ</h3>
+        <p style="font-size:0.75rem;color:var(--text-muted)">Uploadez vos fichiers. Recevez 80% de chaque vente.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:600px;margin:0 auto">
+    <div style="background:var(--dark2);border:0.5px solid var(--border-gold);padding:2rem;text-align:center">
+      <p style="font-size:0.65rem;color:var(--text-muted);letter-spacing:4px;margin-bottom:0.8rem">STARTER</p>
+      <p style="font-size:2.5rem;font-weight:600;color:var(--gold)">9,99€<span style="font-size:0.75rem;color:var(--text-muted);font-weight:400">/mois</span></p>
+      <ul style="list-style:none;margin:1.5rem 0;text-align:left;display:flex;flex-direction:column;gap:0.6rem">
+        <li style="font-size:0.78rem;color:var(--text-muted)">✦ Jusqu'à 5 œuvres</li>
+        <li style="font-size:0.78rem;color:var(--text-muted)">✦ PDF, ePub, MP3, MP4</li>
+        <li style="font-size:0.78rem;color:var(--text-muted)">✦ Chatbot IA intégré</li>
+        <li style="font-size:0.78rem;color:var(--text-muted)">✦ Stats basiques</li>
+        <li style="font-size:0.78rem;color:var(--text-muted)">✦ Commission 20%</li>
+      </ul>
+      <button class="btn-outline" style="width:100%" onclick="subscribe('starter')">CHOISIR STARTER</button>
+    </div>
+
+    <div style="background:var(--dark2);border:2px solid var(--gold);padding:2rem;text-align:center;position:relative">
+      <span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:0.6rem;padding:3px 14px;letter-spacing:2px;font-weight:600;white-space:nowrap">RECOMMANDÉ</span>
+      <p style="font-size:0.65rem;color:var(--text-muted);letter-spacing:4px;margin-bottom:0.8rem">PRO</p>
+      <p style="font-size:2.5rem;font-weight:600;color:var(--gold)">19,99€<span style="font-size:0.75rem;color:var(--text-muted);font-weight:400">/mois</span></p>
+      <ul style="list-style:none;margin:1.5rem 0;text-align:left;display:flex;flex-direction:column;gap:0.6rem">
+        <li style="font-size:0.78rem;color:var(--text-muted)">✦ Œuvres illimitées</li>
+        <li style="font-size:0.78rem;color:var(--text-muted)">✦ Tous formats numériques</li>
+        <li style="font-size:0.78rem;color:var(--text-muted)">✦ Audio ElevenLabs auto</li>
+        <li style="font-size:0.78rem;color:var(--text-muted)">✦ Stats avancées</li>
+        <li style="font-size:0.78rem;color:var(--text-muted)">✦ Commission 15% seulement</li>
+        <li style="font-size:0.78rem;color:var(--gold)">✦ Badge Auteur PHG</li>
+      </ul>
+      <button class="btn-gold" style="width:100%" onclick="subscribe('pro')">CHOISIR PRO</button>
+    </div>
+  </div>
+
+  <p style="text-align:center;font-size:0.72rem;color:var(--text-muted);margin-top:2rem">
+    Paiement sécurisé par Stripe · Résiliation à tout moment · Remboursement sous 14 jours
+  </p>
+</section>
+
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', updateNavbar);
+
+  async function subscribe(plan) {
+    if (!AUTH.isLoggedIn()) { openModal('register'); return; }
+    try {
+      const data = await API.post(`/commissions/souscrire/${plan}`, {});
+      if (data.client_secret) {
+        alert('Paiement initié. Intégrez Stripe.js pour finaliser.');
+      }
+    } catch (e) {
+      alert(e.detail || 'Erreur lors de la souscription');
+    }
+  }
+</script>
+</body>
+</html>

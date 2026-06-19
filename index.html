@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHG AKHENATON IA — Marketplace Numérique Africaine</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo">
+      <span class="logo-eye">𓂀</span>
+      <div class="logo-text">
+        <span class="logo-title">PHG AKHENATON IA</span>
+        <span class="logo-sub">GULRISCH EMPIRE</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#catalogue">Catalogue</a></li>
+      <li><a href="#auteurs">Auteurs</a></li>
+      <li><a href="#plans">Plans</a></li>
+      <li><a href="pages/login.html" class="btn-nav">Connexion</a></li>
+      <li><a href="pages/register.html" class="btn-nav btn-or">Publier</a></li>
+    </ul>
+    <button class="nav-burger" onclick="toggleMenu()">&#9776;</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">𓂀 PUISSANCE HUMAINE GLOBALE</div>
+    <h1 class="hero-title">
+      La Première Marketplace<br>
+      <span class="or">d'Oeuvres Numériques</span><br>
+      Africaines Francophones
+    </h1>
+    <p class="hero-desc">
+      Publiez, vendez et monétisez vos livres, audios, vidéos et créations numériques.<br>
+      Un chatbot IA intégré à chaque oeuvre. L'Empire de la connaissance est ouvert.
+    </p>
+    <div class="hero-cta">
+      <a href="#catalogue" class="btn-primary">Explorer le Catalogue</a>
+      <a href="pages/register.html" class="btn-secondary">Devenir Auteur</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" id="nb-oeuvres">0</span><span class="stat-label">Oeuvres</span></div>
+      <div class="stat-divider">𓂀</div>
+      <div class="stat"><span class="stat-num" id="nb-auteurs">0</span><span class="stat-label">Auteurs</span></div>
+      <div class="stat-divider">𓂀</div>
+      <div class="stat"><span class="stat-num" id="nb-pays">0</span><span class="stat-label">Pays</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="pharaoh-card">
+      <div class="book-icon">📖</div>
+      <div class="card-ia-badge">IA</div>
+      <p class="card-title">L'Art de la Domination Digitale</p>
+      <p class="card-auteur">Goulia Frédéric Richard</p>
+      <div class="card-formats">
+        <span>PDF</span><span>ePub</span><span>Audio</span>
+      </div>
+      <div class="card-bottom">
+        <span class="card-prix">12,99 EUR</span>
+        <button class="btn-acheter">Acheter</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <div class="section-header">
+      <h2>L'Empire de l'Édition Numérique</h2>
+      <p>Technologie pharaonique au service des créateurs africains</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>Chatbot IA par Livre</h3>
+        <p>Chaque oeuvre dispose d'un assistant IA Claude. L'acheteur dialogue avec le livre.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎙️</div>
+        <h3>Audio ElevenLabs</h3>
+        <p>Vos écrits transformés en audiobooks professionnels automatiquement.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Monétisation Royale</h3>
+        <p>80% des revenus pour l'auteur. Paiement Stripe sécurisé. Dashboard temps réel.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>Portée Mondiale</h3>
+        <p>Vendez en EUR, USD. Connecté au GULRISCH Empire — audience africaine francophone.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📦</div>
+        <h3>Tous Formats</h3>
+        <p>PDF, ePub, MP3, MP4 — stockage Cloudflare R2 ultra-rapide et sécurisé.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Analytics Auteur</h3>
+        <p>Vues, ventes, revenus, engagement chatbot — tout en un dashboard pharaonique.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="catalogue" id="catalogue">
+  <div class="container">
+    <div class="section-header">
+      <h2>Catalogue <span class="or">𓂀</span></h2>
+      <p>Oeuvres numériques africaines francophones</p>
+    </div>
+    <div class="catalogue-filters">
+      <button class="filter-btn active" onclick="filtrer('tous')">Tous</button>
+      <button class="filter-btn" onclick="filtrer('roman')">Romans</button>
+      <button class="filter-btn" onclick="filtrer('business')">Business</button>
+      <button class="filter-btn" onclick="filtrer('developpement')">Développement</button>
+      <button class="filter-btn" onclick="filtrer('poesie')">Poésie</button>
+    </div>
+    <div class="livres-grid" id="livres-grid">
+      <div class="livre-card" data-cat="business">
+        <div class="livre-cover cover-dark">
+          <span class="livre-cover-icon">👑</span>
+        </div>
+        <div class="livre-info">
+          <span class="livre-cat">Business</span>
+          <h4>L'Art de la Domination Digitale</h4>
+          <p class="livre-auteur">Goulia Frédéric Richard</p>
+          <div class="livre-formats"><span>PDF</span><span>ePub</span><span>Audio</span></div>
+          <div class="livre-footer">
+            <span class="livre-prix">12,99 EUR</span>
+            <div class="livre-ia"><span class="ia-dot"></span>IA</div>
+          </div>
+        </div>
+      </div>
+      <div class="livre-card" data-cat="developpement">
+        <div class="livre-cover cover-green">
+          <span class="livre-cover-icon">🌱</span>
+        </div>
+        <div class="livre-info">
+          <span class="livre-cat">Développement</span>
+          <h4>La Loi de la Semence</h4>
+          <p class="livre-auteur">Goulia Frédéric Richard</p>
+          <div class="livre-formats"><span>PDF</span><span>ePub</span></div>
+          <div class="livre-footer">
+            <span class="livre-prix">9,99 EUR</span>
+            <div class="livre-ia"><span class="ia-dot"></span>IA</div>
+          </div>
+        </div>
+      </div>
+      <div class="livre-card" data-cat="roman">
+        <div class="livre-cover cover-red">
+          <span class="livre-cover-icon">🔥</span>
+        </div>
+        <div class="livre-info">
+          <span class="livre-cat">Roman</span>
+          <h4>L'Eldorado des Ombres</h4>
+          <p class="livre-auteur">Goulia Frédéric Richard</p>
+          <div class="livre-formats"><span>PDF</span><span>ePub</span><span>Audio</span></div>
+          <div class="livre-footer">
+            <span class="livre-prix">11,99 EUR</span>
+            <div class="livre-ia"><span class="ia-dot"></span>IA</div>
+          </div>
+        </div>
+      </div>
+      <div class="livre-card" data-cat="business">
+        <div class="livre-cover cover-gold">
+          <span class="livre-cover-icon">⚡</span>
+        </div>
+        <div class="livre-info">
+          <span class="livre-cat">Business</span>
+          <h4>De Rien à la Liberté</h4>
+          <p class="livre-auteur">Goulia Frédéric Richard</p>
+          <div class="livre-formats"><span>PDF</span><span>ePub</span></div>
+          <div class="livre-footer">
+            <span class="livre-prix">8,99 EUR</span>
+            <div class="livre-ia"><span class="ia-dot"></span>IA</div>
+          </div>
+        </div>
+      </div>
+      <div class="livre-card" data-cat="roman">
+        <div class="livre-cover cover-purple">
+          <span class="livre-cover-icon">🌌</span>
+        </div>
+        <div class="livre-info">
+          <span class="livre-cat">Roman</span>
+          <h4>L'Afrique et la Civilisation du Futur</h4>
+          <p class="livre-auteur">Goulia Frédéric Richard</p>
+          <div class="livre-formats"><span>PDF</span><span>ePub</span><span>Audio</span></div>
+          <div class="livre-footer">
+            <span class="livre-prix">14,99 EUR</span>
+            <div class="livre-ia"><span class="ia-dot"></span>IA</div>
+          </div>
+        </div>
+      </div>
+      <div class="livre-card placeholder-card">
+        <div class="placeholder-inner">
+          <span class="placeholder-icon">✍️</span>
+          <p>Votre oeuvre ici</p>
+          <a href="pages/register.html" class="btn-small">Publier</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="plans" id="plans">
+  <div class="container">
+    <div class="section-header">
+      <h2>Plans <span class="or">Auteurs</span></h2>
+      <p>Abonnement + 20% commission sur ventes</p>
+    </div>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-header">
+          <h3>Starter</h3>
+          <div class="plan-prix"><span class="plan-montant">9,99€</span><span class="plan-periode">/mois</span></div>
+        </div>
+        <ul class="plan-features">
+          <li>✓ Jusqu'à 5 oeuvres publiées</li>
+          <li>✓ Tous formats (PDF, ePub, MP3, MP4)</li>
+          <li>✓ Chatbot IA sur chaque oeuvre</li>
+          <li>✓ Stats basiques</li>
+          <li>✓ 80% des revenus</li>
+          <li class="muted">✗ Badge Auteur PHG</li>
+        </ul>
+        <a href="pages/register.html" class="btn-plan">Démarrer</a>
+      </div>
+      <div class="plan-card plan-featured">
+        <div class="plan-badge">RECOMMANDÉ</div>
+        <div class="plan-header">
+          <h3>Pro</h3>
+          <div class="plan-prix"><span class="plan-montant">19,99€</span><span class="plan-periode">/mois</span></div>
+        </div>
+        <ul class="plan-features">
+          <li>✓ Oeuvres illimitées</li>
+          <li>✓ Audio auto ElevenLabs</li>
+          <li>✓ Chatbot IA avancé</li>
+          <li>✓ Analytics complet</li>
+          <li>✓ 85% des revenus</li>
+          <li>✓ Badge Auteur PHG 𓂀</li>
+        </ul>
+        <a href="pages/register.html" class="btn-plan btn-plan-or">Devenir Pro</a>
+      </div>
+      <div class="plan-card plan-commission">
+        <div class="plan-header">
+          <h3>Commission</h3>
+          <div class="plan-prix"><span class="plan-montant">20%</span><span class="plan-periode"> plateforme</span></div>
+        </div>
+        <p class="commission-desc">Sur chaque vente, PHG AKHENATON IA prélève 20%. Le reste va directement à l'auteur via Stripe.</p>
+        <div class="commission-ex">
+          <div>Vente 10€ → <strong>8,00€ auteur</strong></div>
+          <div>Vente 20€ → <strong>16,00€ auteur</strong></div>
+          <div>Vente 50€ → <strong>40,00€ auteur</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chatbot-demo">
+  <div class="container">
+    <div class="chatbot-split">
+      <div class="chatbot-text">
+        <h2>Un <span class="or">Assistant IA</span><br>par Oeuvre</h2>
+        <p>Chaque livre vendu dispose de son propre chatbot Claude. L'acheteur dialogue avec l'oeuvre en profondeur.</p>
+        <ul class="chatbot-avantages">
+          <li>🔒 Réservé aux acheteurs</li>
+          <li>🧠 Contexte complet du livre injecté</li>
+          <li>💬 Preview gratuit 3 questions</li>
+          <li>📈 Stats engagement pour l'auteur</li>
+        </ul>
+      </div>
+      <div class="chatbot-ui">
+        <div class="chat-header">
+          <span class="chat-ia-badge">𓂀 IA</span>
+          <span>Assistant — L'Art de la Domination Digitale</span>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <div class="msg msg-ia">Bonjour ! Je suis l'assistant de ce livre. Posez-moi vos questions sur les stratégies de domination digitale.</div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="chat-input" placeholder="Votre question..." onkeydown="if(event.key==='Enter')sendDemo()">
+          <button onclick="sendDemo()" class="btn-send">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="logo-eye">𓂀</span>
+          <div class="logo-text">
+            <span class="logo-title">PHG AKHENATON IA</span>
+            <span class="logo-sub">GULRISCH EMPIRE</span>
+          </div>
+        </div>
+        <p>La marketplace numérique africaine francophone. Publiez, vendez, inspirez.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Plateforme</h4>
+        <ul>
+          <li><a href="#catalogue">Catalogue</a></li>
+          <li><a href="#plans">Plans Auteurs</a></li>
+          <li><a href="pages/register.html">S'inscrire</a></li>
+          <li><a href="pages/login.html">Connexion</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>GULRISCH Empire</h4>
+        <ul>
+          <li><a href="https://gulrisch.com" target="_blank">gulrisch.com</a></li>
+          <li><a href="#">PHG BUILD IA</a></li>
+          <li><a href="#">PHG MIND IA</a></li>
+          <li><a href="#">PHG ELITE IA</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">CGU</a></li>
+          <li><a href="#">Confidentialité</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 PHG AKHENATON IA — GULRISCH Empire — PUISSANCE HUMAINE GLOBALE — Saint-Julien-en-Genevois 𓂀</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Auteur — PHG AKHENATON IA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="logo">
+    <span class="logo-symbol">𓂀</span> PHG AKHENATON IA
+    <small>GULRISCH EMPIRE</small>
+  </a>
+  <ul class="nav-links">
+    <li><a href="catalogue.html">Catalogue</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+  </ul>
+  <div class="nav-actions" id="nav-actions"></div>
+</nav>
+
+<div class="dashboard">
+  <aside class="sidebar">
+    <a href="#overview" class="sidebar-link active">◆ Vue d'ensemble</a>
+    <a href="#mes-oeuvres" class="sidebar-link">◈ Mes œuvres</a>
+    <a href="#publier" class="sidebar-link">⟁ Publier</a>
+    <a href="#revenus" class="sidebar-link">✦ Revenus</a>
+    <a href="#abonnement" class="sidebar-link">◇ Abonnement</a>
+  </aside>
+
+  <div class="dashboard-content">
+    <div id="overview">
+      <h2 style="font-family:'Cinzel',serif;color:var(--gold);letter-spacing:3px;margin-bottom:1.5rem;font-size:1.1rem">TABLEAU DE BORD</h2>
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card"><label>ŒUVRES</label><div class="value" id="s-oeuvres">—</div></div>
+        <div class="stat-card"><label>VENTES TOTALES</label><div class="value" id="s-ventes">—</div></div>
+        <div class="stat-card"><label>VUES</label><div class="value" id="s-vues">—</div></div>
+        <div class="stat-card"><label>REVENUS (€)</label><div class="value" id="s-revenus">—</div></div>
+      </div>
+    </div>
+
+    <div id="mes-oeuvres" style="margin-top:2rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+        <h3 style="font-size:0.72rem;color:var(--text-muted);letter-spacing:3px">MES ŒUVRES</h3>
+        <button class="btn-gold" style="font-size:0.72rem;padding:0.4rem 1rem" onclick="showPublishForm()">+ PUBLIER UNE ŒUVRE</button>
+      </div>
+      <div id="oeuvres-list" class="books-grid"></div>
+    </div>
+
+    <div id="publish-form" style="display:none;margin-top:2rem">
+      <h3 style="font-family:'Cinzel',serif;color:var(--gold);letter-spacing:2px;margin-bottom:1.5rem;font-size:1rem">PUBLIER UNE ŒUVRE</h3>
+      <form id="pub-form" onsubmit="publishOeuvre(event)" style="display:grid;gap:1rem;max-width:600px">
+        <div class="form-group"><label>Titre *</label><input type="text" id="pub-titre" required placeholder="Titre de votre œuvre"></div>
+        <div class="form-group"><label>Description</label><textarea id="pub-desc" style="width:100%;background:var(--dark3);border:0.5px solid var(--border-gold);color:var(--text);padding:0.7rem;font-family:Inter,sans-serif;font-size:0.85rem;resize:vertical;min-height:100px;outline:none" placeholder="Décrivez votre œuvre..."></textarea></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-group">
+            <label>Catégorie</label>
+            <select id="pub-cat" style="width:100%;background:var(--dark3);border:0.5px solid var(--border-gold);color:var(--text);padding:0.7rem;font-family:Inter,sans-serif;outline:none">
+              <option value="roman">Roman</option>
+              <option value="business">Business</option>
+              <option value="developpement">Développement personnel</option>
+              <option value="poesie">Poésie</option>
+              <option value="spirituel">Spirituel</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Prix (€) *</label><input type="number" id="pub-prix" step="0.01" min="0.99" required placeholder="9.99"></div>
+        </div>
+        <div class="form-group"><label>Fichier PDF</label><input type="file" id="pub-pdf" accept=".pdf" style="color:var(--text-muted);font-size:0.8rem"></div>
+        <div class="form-group"><label>Fichier ePub</label><input type="file" id="pub-epub" accept=".epub" style="color:var(--text-muted);font-size:0.8rem"></div>
+        <div class="form-group"><label>Image de couverture</label><input type="file" id="pub-cover" accept="image/*" style="color:var(--text-muted);font-size:0.8rem"></div>
+        <div id="pub-err" class="error-msg"></div>
+        <div style="display:flex;gap:1rem">
+          <button type="submit" class="btn-gold" style="padding:0.7rem 2rem">PUBLIER</button>
+          <button type="button" class="btn-outline" onclick="document.getElementById('publish-form').style.display='none'">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (!AUTH.isLoggedIn()) { window.location.href = '../index.html'; return; }
+    updateNavbar();
+    await loadDashboard();
+  });
+
+  async function loadDashboard() {
+    try {
+      const data = await API.get('/commissions/dashboard');
+      document.getElementById('s-oeuvres').textContent = data.oeuvres;
+      document.getElementById('s-ventes').textContent = data.total_ventes;
+      document.getElementById('s-vues').textContent = data.total_vues;
+      document.getElementById('s-revenus').textContent = data.revenus_total.toFixed(2) + '€';
+
+      const list = document.getElementById('oeuvres-list');
+      list.innerHTML = data.catalogue.map(o => `
+        <div class="book-card" style="cursor:default">
+          <div class="book-cover" style="background:linear-gradient(135deg,#1a1200,#111)">
+            <div class="book-cover-inner">
+              <div class="book-cover-title">${o.titre.toUpperCase()}</div>
+              <div class="book-cover-line"></div>
+            </div>
+          </div>
+          <div class="book-title">${o.titre}</div>
+          <div class="book-footer">
+            <span class="book-price">${o.prix.toFixed(2)}€</span>
+          </div>
+          <div style="margin-top:0.5rem;display:flex;gap:0.5rem;font-size:0.65rem;color:var(--text-muted)">
+            <span>👁 ${o.vues} vues</span>
+            <span>◆ ${o.ventes} ventes</span>
+          </div>
+        </div>
+      `).join('') || '<div class="loading-placeholder">Aucune œuvre publiée.</div>';
+    } catch (e) { console.error(e); }
+  }
+
+  function showPublishForm() {
+    document.getElementById('publish-form').style.display = 'block';
+    document.getElementById('publish-form').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  async function publishOeuvre(e) {
+    e.preventDefault();
+    const err = document.getElementById('pub-err');
+    try {
+      const form = new FormData();
+      form.append('titre', document.getElementById('pub-titre').value);
+      form.append('description', document.getElementById('pub-desc').value);
+      form.append('categorie', document.getElementById('pub-cat').value);
+      form.append('prix', document.getElementById('pub-prix').value);
+      const pdf = document.getElementById('pub-pdf').files[0];
+      const epub = document.getElementById('pub-epub').files[0];
+      const cover = document.getElementById('pub-cover').files[0];
+      if (pdf) form.append('fichier_pdf', pdf);
+      if (epub) form.append('fichier_epub', epub);
+      if (cover) form.append('couverture', cover);
+      await API.postForm('/oeuvres/', form);
+      document.getElementById('publish-form').style.display = 'none';
+      await loadDashboard();
+    } catch (e) {
+      err.textContent = e.detail || 'Erreur lors de la publication';
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogue — PHG AKHENATON IA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="logo">
+    <span class="logo-symbol">𓂀</span> PHG AKHENATON IA
+    <small>GULRISCH EMPIRE</small>
+  </a>
+  <ul class="nav-links">
+    <li><a href="catalogue.html" class="active">Catalogue</a></li>
+    <li><a href="auteurs.html">Auteurs</a></li>
+    <li><a href="abonnement.html">Publier</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-outline" onclick="openModal('login')">Connexion</button>
+    <button class="btn-gold" onclick="openModal('register')">Publier</button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>CATALOGUE</h1>
+  <p>Toutes les œuvres numériques africaines francophones</p>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filterBy('all', this)">TOUT</button>
+  <button class="filter-btn" onclick="filterBy('roman', this)">ROMAN</button>
+  <button class="filter-btn" onclick="filterBy('business', this)">BUSINESS</button>
+  <button class="filter-btn" onclick="filterBy('developpement', this)">DÉVELOPPEMENT</button>
+  <button class="filter-btn" onclick="filterBy('poesie', this)">POÉSIE</button>
+  <button class="filter-btn" onclick="filterBy('spirituel', this)">SPIRITUEL</button>
+  <input class="filter-search" type="text" placeholder="Rechercher une œuvre..." oninput="searchBooks(this.value)">
+</div>
+
+<section class="catalogue-section">
+  <div class="books-grid" id="books-grid">
+    <div class="loading-placeholder">Chargement du catalogue...</div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  let allBooks = [];
+  let currentFilter = 'all';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    await loadAllBooks();
+  });
+
+  async function loadAllBooks() {
+    const grid = document.getElementById('books-grid');
+    try {
+      allBooks = await API.get('/oeuvres/?limit=50');
+      renderGrid(allBooks);
+    } catch (e) {
+      grid.innerHTML = renderDefaultBooks();
+    }
+  }
+
+  function filterBy(cat, btn) {
+    currentFilter = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filtered = cat === 'all' ? allBooks : allBooks.filter(o => o.categorie === cat);
+    renderGrid(filtered);
+  }
+
+  function searchBooks(q) {
+    const filtered = allBooks.filter(o =>
+      o.titre.toLowerCase().includes(q.toLowerCase()) ||
+      (o.description || '').toLowerCase().includes(q.toLowerCase())
+    );
+    renderGrid(filtered);
+  }
+
+  function renderGrid(books) {
+    const grid = document.getElementById('books-grid');
+    if (!books.length) {
+      grid.innerHTML = '<div class="loading-placeholder">Aucune œuvre trouvée.</div>';
+      return;
+    }
+    grid.innerHTML = books.map(renderBookCard).join('');
+  }
+</script>
+</body>
+</html>
