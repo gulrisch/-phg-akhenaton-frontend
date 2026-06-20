@@ -1,244 +1,1064 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catalogue â€” PHG AKHENATON IA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogue — PHG AKHENATON IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C96B;
+      --gold-dark: #9B7A2F;
+      --black: #0A0A0A;
+      --black-soft: #111111;
+      --black-card: #161616;
+      --black-border: #2A2A2A;
+      --white: #F5F0E8;
+      --white-muted: #B0A898;
+      --font-display: 'Cinzel', serif;
+      --font-body: 'Raleway', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--black); color: var(--white); font-family: var(--font-body); min-height: 100vh; }
+
+    /* NAV */
+    nav {
+      background: var(--black-soft); border-bottom: 1px solid var(--black-border);
+      padding: 0 2rem; display: flex; align-items: center; justify-content: space-between;
+      height: 64px; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.8rem; font-weight: 500; color: var(--white-muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-cta { background: var(--gold); color: var(--black) !important; font-weight: 700 !important; padding: 0.4rem 1.2rem; border-radius: 2px; }
+
+    /* HERO */
+    .catalogue-hero {
+      text-align: center; padding: 4rem 2rem 3rem;
+      background: linear-gradient(180deg, #1A1400 0%, var(--black) 100%);
+      border-bottom: 1px solid var(--black-border); position: relative; overflow: hidden;
+    }
+    .catalogue-hero::before {
+      content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(2rem,5vw,3.5rem); font-weight: 900; color: var(--white); letter-spacing: 0.05em; line-height: 1.1; margin-bottom: 1rem; }
+    .hero-sub { font-size: 0.95rem; color: var(--white-muted); font-weight: 300; letter-spacing: 0.05em; max-width: 500px; margin: 0 auto 1.5rem; }
+    .publish-banner {
+      display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+      background: rgba(201,168,76,0.07); border: 1px solid var(--gold-dark);
+      border-radius: 3px; padding: 1rem 2rem; max-width: 680px; margin: 0 auto; flex-wrap: wrap;
+    }
+    .publish-banner p { font-size: 0.82rem; color: var(--white-muted); }
+    .publish-banner p strong { color: var(--gold); }
+    .btn-publish {
+      background: var(--gold); color: var(--black); font-family: var(--font-body);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      border: none; padding: 0.55rem 1.4rem; border-radius: 2px; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-publish:hover { background: var(--gold-light); }
+
+    /* FILTERS */
+    .filters-bar { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.5rem; padding: 2rem 2rem 1.5rem; }
+    .filter-btn {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--white-muted); background: transparent; border: 1px solid var(--black-border);
+      padding: 0.45rem 1.2rem; border-radius: 2px; cursor: pointer; transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--gold-dark); color: var(--gold-light); }
+    .filter-btn.active { background: var(--gold); border-color: var(--gold); color: var(--black); }
+
+    /* GRID */
+    .catalogue-section { max-width: 1300px; margin: 0 auto; padding: 1.5rem 2rem 5rem; }
+    .results-count { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--white-muted); text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--black-border); }
+    .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1.5rem; }
+
+    /* CARD */
+    .book-card {
+      background: var(--black-card); border: 1px solid var(--black-border);
+      border-radius: 3px; overflow: hidden; display: flex; flex-direction: column;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .book-card:hover { border-color: var(--gold-dark); transform: translateY(-3px); }
+    .book-cover {
+      aspect-ratio: 2/3; background: #1A1400;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative; cursor: pointer;
+    }
+    .book-cover-placeholder {
+      width: 100%; height: 100%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 1.5rem;
+      background: linear-gradient(135deg, #1A1400, #0D0D00); text-align: center; gap: 0.5rem;
+    }
+    .placeholder-title { font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--gold); line-height: 1.3; }
+    .placeholder-line { width: 30px; height: 1px; background: var(--gold-dark); margin: 0.3rem auto; }
+    .placeholder-author { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--white-muted); text-transform: uppercase; }
+    .book-badge { position: absolute; top: 0.6rem; left: 0.6rem; background: var(--gold); color: var(--black); font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 1px; }
+    .cover-peek {
+      position: absolute; inset: 0; background: rgba(0,0,0,0.82);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.2s; cursor: pointer;
+    }
+    .book-cover:hover .cover-peek { opacity: 1; }
+    .cover-peek span { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 0.4rem 1rem; border-radius: 2px; }
+
+    .book-info { padding: 1rem; display: flex; flex-direction: column; flex: 1; gap: 0.4rem; }
+    .book-category { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); }
+    .book-title { font-family: var(--font-display); font-size: 0.78rem; font-weight: 600; color: var(--white); line-height: 1.4; flex: 1; cursor: pointer; }
+    .book-title:hover { color: var(--gold-light); }
+    .book-author { font-size: 0.68rem; color: var(--white-muted); }
+    .author-link { color: var(--gold-dark); text-decoration: none; font-size: 0.65rem; font-weight: 600; }
+    .author-link:hover { color: var(--gold); text-decoration: underline; }
+    .book-price { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gold); margin-top: 0.3rem; }
+    .book-price span { font-size: 0.65rem; font-weight: 400; color: var(--white-muted); font-family: var(--font-body); margin-left: 0.3rem; }
+    .rent-price { font-size: 0.72rem; color: var(--gold-light); }
+
+    .card-actions { display: flex; flex-direction: column; gap: 0.5rem; padding: 0 1rem 1rem; }
+
+    /* PRIMARY ACTION — achat direct sur PHG */
+    .btn-buy-here {
+      display: block; background: var(--gold); color: var(--black);
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      text-align: center; text-decoration: none; padding: 0.6rem 0.5rem;
+      border-radius: 2px; transition: background 0.2s; border: none; cursor: pointer; font-family: var(--font-body);
+    }
+    .btn-buy-here:hover { background: var(--gold-light); }
+
+    .card-actions-row { display: flex; gap: 0.4rem; }
+    .btn-rent {
+      flex: 1; background: transparent; color: var(--gold);
+      border: 1px solid var(--gold-dark); font-family: var(--font-body);
+      font-size: 0.63rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      text-align: center; padding: 0.48rem 0.3rem; border-radius: 2px;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-rent:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+    .btn-download {
+      flex: 1; background: transparent; color: var(--white-muted);
+      border: 1px solid var(--black-border); font-family: var(--font-body);
+      font-size: 0.63rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      text-align: center; padding: 0.48rem 0.3rem; border-radius: 2px;
+      cursor: pointer; transition: all 0.2s; text-decoration: none; display: block;
+    }
+    .btn-download:hover { color: var(--white); border-color: var(--white-muted); }
+
+    .btn-desc {
+      background: transparent; color: var(--white-muted); border: none;
+      font-family: var(--font-body); font-size: 0.64rem; font-weight: 500;
+      letter-spacing: 0.06em; text-align: center; padding: 0.2rem;
+      cursor: pointer; text-decoration: underline; transition: color 0.2s;
+    }
+    .btn-desc:hover { color: var(--gold-light); }
+
+    .book-card.hidden { display: none; }
+
+    /* ══════════════════════════════════
+       MODAL BASE
+    ══════════════════════════════════ */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.90); z-index: 999;
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--black-card); border: 1px solid var(--gold-dark);
+      border-radius: 4px; padding: 2.5rem; width: 100%;
+      position: relative; max-height: 92vh; overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; color: var(--white-muted);
+      font-size: 1.4rem; cursor: pointer; line-height: 1; z-index: 2;
+    }
+    .modal-close:hover { color: var(--white); }
+
+    /* ══════════════════════════════════
+       FICHE ŒUVRE (description)
+    ══════════════════════════════════ */
+    #desc-modal .modal { max-width: 680px; padding: 0; overflow: hidden; }
+
+    .desc-hero {
+      background: linear-gradient(135deg, #1A1400, #0D0D00);
+      padding: 2rem 2rem 1.5rem;
+      border-bottom: 1px solid var(--black-border);
+      display: flex; gap: 1.5rem; align-items: flex-start;
+    }
+    .desc-cover-box {
+      width: 90px; min-width: 90px; aspect-ratio: 2/3;
+      background: rgba(201,168,76,0.08); border: 1px solid var(--gold-dark);
+      border-radius: 2px; display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .desc-meta { flex: 1; }
+    .desc-cat-badge {
+      display: inline-block; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--black); background: var(--gold);
+      padding: 0.18rem 0.6rem; border-radius: 1px; margin-bottom: 0.6rem;
+    }
+    .desc-full-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--white); line-height: 1.4; margin-bottom: 0.5rem; }
+    .desc-author-name { font-size: 0.78rem; color: var(--white-muted); margin-bottom: 0.8rem; }
+    .desc-author-name a { color: var(--gold); text-decoration: none; font-weight: 600; }
+    .desc-author-name a:hover { text-decoration: underline; }
+    .desc-price-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .desc-price-main { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--gold); }
+    .desc-price-main small { font-size: 0.65rem; font-family: var(--font-body); color: var(--white-muted); font-weight: 400; margin-left: 0.3rem; }
+    .desc-rent-info { font-size: 0.72rem; color: var(--gold-light); }
+
+    .desc-body { padding: 1.5rem 2rem; }
+
+    /* TABS */
+    .desc-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--black-border); margin-bottom: 1.5rem; }
+    .desc-tab {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--white-muted); background: none; border: none; border-bottom: 2px solid transparent;
+      padding: 0.6rem 1.2rem; cursor: pointer; transition: all 0.2s; margin-bottom: -1px;
+    }
+    .desc-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .desc-tab-content { display: none; }
+    .desc-tab-content.active { display: block; }
+
+    .desc-text { font-size: 0.87rem; color: var(--white-muted); line-height: 1.9; }
+    .desc-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+    .desc-tag { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); border: 1px solid var(--black-border); padding: 0.2rem 0.6rem; border-radius: 1px; }
+
+    /* AUTEUR TAB */
+    .author-profile { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.2rem; }
+    .author-avatar { width: 56px; min-width: 56px; height: 56px; border-radius: 50%; background: rgba(201,168,76,0.1); border: 1px solid var(--gold-dark); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+    .author-info-name { font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .author-info-bio { font-size: 0.8rem; color: var(--white-muted); line-height: 1.7; }
+    .author-links { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+    .author-ext-link {
+      display: flex; align-items: center; gap: 0.6rem;
+      border: 1px solid var(--black-border); border-radius: 3px; padding: 0.7rem 1rem;
+      text-decoration: none; transition: border-color 0.2s; color: var(--white);
+    }
+    .author-ext-link:hover { border-color: var(--gold-dark); }
+    .author-ext-link .link-icon { font-size: 1rem; }
+    .author-ext-link .link-label { font-size: 0.75rem; font-weight: 600; color: var(--white); }
+    .author-ext-link .link-url { font-size: 0.65rem; color: var(--white-muted); margin-top: 0.1rem; }
+    .author-ext-link:hover .link-label { color: var(--gold); }
+
+    /* ACCÈS TAB */
+    .access-options { display: flex; flex-direction: column; gap: 0.8rem; }
+    .access-option {
+      border: 1px solid var(--black-border); border-radius: 3px; padding: 1rem 1.2rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .access-option.primary { border-color: var(--gold-dark); background: rgba(201,168,76,0.04); }
+    .access-opt-info .access-opt-label { font-size: 0.82rem; font-weight: 600; color: var(--white); }
+    .access-opt-info .access-opt-desc { font-size: 0.68rem; color: var(--white-muted); margin-top: 0.2rem; line-height: 1.5; }
+    .access-opt-price { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gold); white-space: nowrap; }
+    .access-opt-btn {
+      font-family: var(--font-body); font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 0.5rem 1rem;
+      border-radius: 2px; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+      text-decoration: none; display: inline-block; text-align: center;
+    }
+    .access-opt-btn.gold { background: var(--gold); color: var(--black); border: none; }
+    .access-opt-btn.gold:hover { background: var(--gold-light); }
+    .access-opt-btn.outline { background: transparent; color: var(--gold); border: 1px solid var(--gold-dark); }
+    .access-opt-btn.outline:hover { background: rgba(201,168,76,0.1); }
+    .access-opt-btn.ghost { background: transparent; color: var(--white-muted); border: 1px solid var(--black-border); }
+    .access-opt-btn.ghost:hover { color: var(--white); border-color: var(--white-muted); }
+    .access-divider { text-align: center; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black-border); padding: 0.2rem 0; position: relative; }
+    .access-divider::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--black-border); z-index: 0; }
+    .access-divider span { background: var(--black-card); padding: 0 0.8rem; position: relative; z-index: 1; color: var(--white-muted); }
+
+    /* ══════════════════════════════════
+       RENT MODAL
+    ══════════════════════════════════ */
+    #rent-modal .modal { max-width: 420px; }
+    .modal h2 { font-family: var(--font-display); font-size: 1.1rem; color: var(--gold); margin-bottom: 0.5rem; }
+    .modal-book-title { font-size: 0.82rem; color: var(--white-muted); margin-bottom: 1.5rem; line-height: 1.4; }
+    .modal-options { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.5rem; }
+    .rent-option {
+      display: flex; align-items: center; justify-content: space-between;
+      border: 1px solid var(--black-border); border-radius: 3px; padding: 0.9rem 1rem;
+      cursor: pointer; transition: border-color 0.2s;
+    }
+    .rent-option:hover, .rent-option.selected { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+    .rent-option label { font-size: 0.82rem; color: var(--white); cursor: pointer; }
+    .rent-option label small { display: block; font-size: 0.68rem; color: var(--white-muted); margin-top: 0.2rem; }
+    .rent-opt-price { font-family: var(--font-display); font-size: 0.95rem; color: var(--gold); font-weight: 700; }
+    .modal-email { width: 100%; background: #1A1A1A; border: 1px solid var(--black-border); color: var(--white); font-family: var(--font-body); font-size: 0.82rem; padding: 0.75rem 1rem; border-radius: 2px; margin-bottom: 1rem; outline: none; }
+    .modal-email:focus { border-color: var(--gold-dark); }
+    .btn-confirm { width: 100%; background: var(--gold); color: var(--black); border: none; font-family: var(--font-body); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.8rem; border-radius: 2px; cursor: pointer; transition: background 0.2s; }
+    .btn-confirm:hover { background: var(--gold-light); }
+    .modal-note { font-size: 0.65rem; color: var(--white-muted); text-align: center; margin-top: 0.8rem; line-height: 1.5; }
+
+    /* ══════════════════════════════════
+       UPLOAD MODAL
+    ══════════════════════════════════ */
+    #upload-modal .modal { max-width: 520px; }
+    .upload-steps { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid var(--black-border); }
+    .upload-step-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white-muted); padding: 0.5rem 1rem; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+    .upload-step-label.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .upload-step-label.done { color: var(--gold-dark); }
+
+    .upload-step { display: none; }
+    .upload-step.active { display: block; }
+
+    .upload-zone {
+      border: 2px dashed var(--gold-dark); border-radius: 3px; padding: 2.5rem 2rem;
+      text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+      margin-bottom: 1.2rem; background: rgba(201,168,76,0.02);
+    }
+    .upload-zone:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+    .upload-icon-big { font-size: 2.5rem; margin-bottom: 0.7rem; }
+    .upload-zone h3 { font-family: var(--font-display); font-size: 0.9rem; color: var(--white); margin-bottom: 0.4rem; }
+    .upload-zone p { font-size: 0.78rem; color: var(--white-muted); line-height: 1.6; }
+    .upload-zone input[type="file"] { display: none; }
+    .upload-file-name { font-size: 0.8rem; color: var(--gold); margin-top: 0.5rem; font-weight: 600; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 0.8rem; }
+    .form-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white-muted); }
+    .form-input {
+      background: #1A1A1A; border: 1px solid var(--black-border); color: var(--white);
+      font-family: var(--font-body); font-size: 0.82rem; padding: 0.7rem 1rem;
+      border-radius: 2px; outline: none; width: 100%;
+    }
+    .form-input:focus { border-color: var(--gold-dark); }
+    select.form-input option { background: #1A1A1A; }
+    textarea.form-input { resize: vertical; min-height: 90px; line-height: 1.7; }
+
+    /* Site/liens auteur */
+    .links-section { margin-top: 0.5rem; }
+    .links-section .link-row { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .link-row .form-input { flex: 1; }
+    .link-row select.form-input { max-width: 120px; }
+    .btn-add-link { background: transparent; border: 1px dashed var(--gold-dark); color: var(--gold-dark); font-family: var(--font-body); font-size: 0.7rem; padding: 0.4rem 0.8rem; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+    .btn-add-link:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Access options for upload */
+    .access-toggles { display: flex; flex-direction: column; gap: 0.6rem; }
+    .toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      border: 1px solid var(--black-border); border-radius: 3px; padding: 0.8rem 1rem;
+    }
+    .toggle-row.on { border-color: var(--gold-dark); background: rgba(201,168,76,0.04); }
+    .toggle-row label { font-size: 0.8rem; color: var(--white); }
+    .toggle-row label small { display: block; font-size: 0.65rem; color: var(--white-muted); margin-top: 0.15rem; }
+    .toggle-switch { position: relative; width: 36px; height: 20px; }
+    .toggle-switch input { display: none; }
+    .toggle-switch .slider { position: absolute; inset: 0; background: var(--black-border); border-radius: 20px; cursor: pointer; transition: 0.3s; }
+    .toggle-switch input:checked + .slider { background: var(--gold); }
+    .toggle-switch .slider::before { content: ''; position: absolute; width: 14px; height: 14px; left: 3px; top: 3px; background: white; border-radius: 50%; transition: 0.3s; }
+    .toggle-switch input:checked + .slider::before { transform: translateX(16px); }
+    .price-inline { display: none; margin-top: 0.5rem; }
+    .price-inline.show { display: flex; gap: 0.5rem; align-items: center; }
+    .price-inline .form-input { max-width: 120px; }
+    .price-inline span { font-size: 0.75rem; color: var(--white-muted); }
+
+    .upload-progress { display: none; margin: 1rem 0; }
+    .progress-bar { height: 4px; background: var(--black-border); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.3s; }
+    .progress-text { font-size: 0.7rem; color: var(--white-muted); margin-top: 0.5rem; text-align: center; }
+
+    .upload-nav { display: flex; gap: 0.7rem; margin-top: 1.5rem; }
+    .btn-next { flex: 1; background: var(--gold); color: var(--black); border: none; font-family: var(--font-body); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.8rem; border-radius: 2px; cursor: pointer; transition: background 0.2s; }
+    .btn-next:hover { background: var(--gold-light); }
+    .btn-prev { background: transparent; color: var(--white-muted); border: 1px solid var(--black-border); font-family: var(--font-body); font-size: 0.78rem; padding: 0.8rem 1.2rem; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+    .btn-prev:hover { color: var(--white); border-color: var(--white-muted); }
+
+    /* ══ AVIS ══ */
+    .reviews-summary { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; padding: 1rem 1.2rem; background: rgba(201,168,76,0.04); border: 1px solid var(--black-border); border-radius: 3px; }
+    .reviews-score { text-align: center; }
+    .reviews-score .score-big { font-family: var(--font-display); font-size: 2.8rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .reviews-score .score-stars { font-size: 1rem; letter-spacing: 0.05em; margin: 0.3rem 0; }
+    .reviews-score .score-count { font-size: 0.65rem; color: var(--white-muted); letter-spacing: 0.08em; }
+    .reviews-bars { flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
+    .bar-row { display: flex; align-items: center; gap: 0.5rem; }
+    .bar-label { font-size: 0.65rem; color: var(--white-muted); width: 12px; text-align: right; }
+    .bar-track { flex: 1; height: 5px; background: var(--black-border); border-radius: 3px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--gold); border-radius: 3px; transition: width 0.6s ease; }
+    .bar-pct { font-size: 0.6rem; color: var(--white-muted); width: 28px; }
+
+    .review-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.2rem; }
+    .review-item { border: 1px solid var(--black-border); border-radius: 3px; padding: 1rem 1.2rem; }
+    .review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.4rem; }
+    .review-author-row { display: flex; align-items: center; gap: 0.6rem; }
+    .review-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(201,168,76,0.1); border: 1px solid var(--gold-dark); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+    .review-name { font-size: 0.8rem; font-weight: 600; color: var(--white); }
+    .review-date { font-size: 0.65rem; color: var(--white-muted); }
+    .review-stars { font-size: 0.85rem; letter-spacing: 0.03em; }
+    .review-text { font-size: 0.82rem; color: var(--white-muted); line-height: 1.75; }
+    .review-verified { font-size: 0.62rem; color: var(--gold-dark); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.5rem; }
+
+    .review-form { border: 1px solid var(--black-border); border-radius: 3px; padding: 1.2rem; background: rgba(201,168,76,0.02); }
+    .review-form h4 { font-family: var(--font-display); font-size: 0.85rem; color: var(--white); margin-bottom: 1rem; }
+    .star-picker { display: flex; gap: 0.3rem; margin-bottom: 0.8rem; }
+    .star-btn { font-size: 1.4rem; background: none; border: none; cursor: pointer; opacity: 0.3; transition: opacity 0.15s, transform 0.15s; line-height: 1; }
+    .star-btn.active, .star-btn:hover { opacity: 1; transform: scale(1.1); }
+    .review-form .form-group { margin-bottom: 0.7rem; }
+    .btn-submit-review { background: var(--gold); color: var(--black); border: none; font-family: var(--font-body); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.5rem; border-radius: 2px; cursor: pointer; transition: background 0.2s; }
+    .btn-submit-review:hover { background: var(--gold-light); }
+    .review-success { display: none; font-size: 0.82rem; color: var(--gold); text-align: center; padding: 0.8rem; }
+
+    /* FOOTER */
+    footer { background: var(--black-soft); border-top: 1px solid var(--black-border); text-align: center; padding: 2rem; font-size: 0.72rem; color: var(--white-muted); letter-spacing: 0.08em; }
+    footer strong { color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .books-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .catalogue-hero { padding: 3rem 1.5rem 2rem; }
+      .catalogue-section { padding: 1rem 1rem 4rem; }
+      .desc-hero { flex-direction: column; }
+      .access-option { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
 
-<nav class="navbar">
-  <a href="../index.html" class="logo">
-    <span class="logo-symbol">ð“‚€</span> PHG AKHENATON IA
-    <small>GULRISCH EMPIRE</small>
-  </a>
+<nav>
+  <a class="nav-logo" href="../index.html">𓂀 PHG AKHENATON IA · GULRISCH EMPIRE</a>
   <ul class="nav-links">
     <li><a href="catalogue.html" class="active">Catalogue</a></li>
     <li><a href="auteurs.html">Auteurs</a></li>
-    <li><a href="abonnement.html">Publier</a></li>
+    <li><a href="abonnement.html" class="nav-cta">Publier</a></li>
   </ul>
-  <div class="nav-actions">
-    <button class="btn-outline" onclick="openModal('login')">Connexion</button>
-    <button class="btn-gold" onclick="openModal('register')">Publier</button>
-  </div>
 </nav>
 
-<div class="page-header">
-  <h1>CATALOGUE</h1>
-  <p>Toutes les Å“uvres numÃ©riques africaines francophones</p>
-</div>
+<header class="catalogue-hero">
+  <p class="hero-eyebrow">PHG ÉDITIONS · GULRISCH EMPIRE</p>
+  <h1 class="hero-title">CATALOGUE</h1>
+  <p class="hero-sub">Toutes les œuvres numériques</p>
+  <div class="publish-banner">
+    <p><strong>Vous êtes auteur ?</strong> Publiez votre œuvre, créez votre page, partagez vos liens.</p>
+    <button class="btn-publish" onclick="openUploadModal()">📤 Publier mon œuvre</button>
+  </div>
+</header>
 
-<div class="filters">
-  <button class="filter-btn active" onclick="filterBy('all', this)">TOUT</button>
-  <button class="filter-btn" onclick="filterBy('roman', this)">ROMAN</button>
-  <button class="filter-btn" onclick="filterBy('business', this)">BUSINESS</button>
-  <button class="filter-btn" onclick="filterBy('developpement', this)">DÃ‰VELOPPEMENT</button>
-  <button class="filter-btn" onclick="filterBy('poesie', this)">POÃ‰SIE</button>
-  <button class="filter-btn" onclick="filterBy('spirituel', this)">SPIRITUEL</button>
-  <input class="filter-search" type="text" placeholder="Rechercher une Å“uvre..." oninput="searchBooks(this.value)">
+<div class="filters-bar">
+  <button class="filter-btn active" data-filter="all">Tout</button>
+  <button class="filter-btn" data-filter="roman">Roman</button>
+  <button class="filter-btn" data-filter="business">Business</button>
+  <button class="filter-btn" data-filter="developpement">Développement</button>
+  <button class="filter-btn" data-filter="spirituel">Spirituel</button>
 </div>
 
 <section class="catalogue-section">
+  <p class="results-count" id="results-count">10 œuvres disponibles</p>
   <div class="books-grid" id="books-grid">
-    <div class="loading-placeholder">Chargement du catalogue...</div>
+
+    <div class="book-card" data-category="roman">
+      <div class="book-cover" onclick="openDesc(0)"><div class="book-cover-placeholder"><div class="placeholder-title">Les 48 Lois de Zarek l'Archiviste</div><div class="placeholder-line"></div><div class="placeholder-author">Frederic Goulia</div></div><span class="book-badge">Roman</span><div class="cover-peek"><span>Voir la fiche</span></div></div>
+      <div class="book-info"><div class="book-category">Roman · Stratégie</div><div class="book-title" onclick="openDesc(0)">Les 48 Lois de Zarek l'Archiviste</div><div class="book-author">par <a class="author-link" onclick="openDesc(0,1)">Frederic Goulia</a></div><div class="book-price">6,99 $ <span>Kindle</span></div><div class="rent-price">📖 Location dès 1,99 $</div></div>
+      <div class="card-actions">
+        <button class="btn-buy-here" onclick="openDesc(0,2)">🛒 Obtenir cette œuvre</button>
+        <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('Les 48 Lois de Zarek l\'Archiviste')">📖 Louer</button><a class="btn-download" href="https://pub-phgedition.r2.dev/livres/zarek-archiviste.pdf" download>⬇ PDF</a></div>
+        <button class="btn-desc" onclick="openDesc(0)">📄 Description & Auteur</button>
+      </div>
+    </div>
+
+    <div class="book-card" data-category="roman">
+      <div class="book-cover" onclick="openDesc(1)"><div class="book-cover-placeholder"><div class="placeholder-title">Le Figuier de Canaan</div><div class="placeholder-line"></div><div class="placeholder-author">Frederic Goulia</div></div><span class="book-badge">Roman</span><div class="cover-peek"><span>Voir la fiche</span></div></div>
+      <div class="book-info"><div class="book-category">Roman · Spirituel</div><div class="book-title" onclick="openDesc(1)">Le Figuier de Canaan</div><div class="book-author">par <a class="author-link" onclick="openDesc(1,1)">Frederic Goulia</a></div><div class="book-price">5,99 $ <span>Kindle</span></div><div class="rent-price">📖 Location dès 1,49 $</div></div>
+      <div class="card-actions">
+        <button class="btn-buy-here" onclick="openDesc(1,2)">🛒 Obtenir cette œuvre</button>
+        <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('Le Figuier de Canaan')">📖 Louer</button><a class="btn-download" href="https://pub-phgedition.r2.dev/livres/figuier-canaan.pdf" download>⬇ PDF</a></div>
+        <button class="btn-desc" onclick="openDesc(1)">📄 Description & Auteur</button>
+      </div>
+    </div>
+
+    <div class="book-card" data-category="roman">
+      <div class="book-cover" onclick="openDesc(2)"><div class="book-cover-placeholder"><div class="placeholder-title">L'Eldorado des Ombres</div><div class="placeholder-line"></div><div class="placeholder-author">Frederic Goulia</div></div><span class="book-badge">Roman</span><div class="cover-peek"><span>Voir la fiche</span></div></div>
+      <div class="book-info"><div class="book-category">Roman</div><div class="book-title" onclick="openDesc(2)">L'Eldorado des Ombres</div><div class="book-author">par <a class="author-link" onclick="openDesc(2,1)">Frederic Goulia</a></div><div class="book-price">9,99 $ <span>Kindle</span></div><div class="rent-price">📖 Location dès 1,99 $</div></div>
+      <div class="card-actions">
+        <button class="btn-buy-here" onclick="openDesc(2,2)">🛒 Obtenir cette œuvre</button>
+        <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('L\'Eldorado des Ombres')">📖 Louer</button><a class="btn-download" href="https://pub-phgedition.r2.dev/livres/eldorado-ombres.pdf" download>⬇ PDF</a></div>
+        <button class="btn-desc" onclick="openDesc(2)">📄 Description & Auteur</button>
+      </div>
+    </div>
+
+    <div class="book-card" data-category="developpement">
+      <div class="book-cover" onclick="openDesc(3)"><div class="book-cover-placeholder"><div class="placeholder-title">De Rien à la Liberté</div><div class="placeholder-line"></div><div class="placeholder-author">Frederic Richard Goulia</div></div><span class="book-badge">Développement</span><div class="cover-peek"><span>Voir la fiche</span></div></div>
+      <div class="book-info"><div class="book-category">Développement · Finance</div><div class="book-title" onclick="openDesc(3)">De Rien à la Liberté</div><div class="book-author">par <a class="author-link" onclick="openDesc(3,1)">Frederic Richard Goulia</a></div><div class="book-price">8,99 $ <span>Kindle</span></div><div class="rent-price">📖 Location dès 1,99 $</div></div>
+      <div class="card-actions">
+        <button class="btn-buy-here" onclick="openDesc(3,2)">🛒 Obtenir cette œuvre</button>
+        <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('De Rien à la Liberté')">📖 Louer</button><a class="btn-download" href="https://pub-phgedition.r2.dev/livres/de-rien-a-la-liberte.pdf" download>⬇ PDF</a></div>
+        <button class="btn-desc" onclick="openDesc(3)">📄 Description & Auteur</button>
+      </div>
+    </div>
+
+    <div class="book-card" data-category="developpement">
+      <div class="book-cover" onclick="openDesc(4)"><div class="book-cover-placeholder"><div class="placeholder-title">La Loi de la Semence</div><div class="placeholder-line"></div><div class="placeholder-author">Frederic Goulia</div></div><span class="book-badge">Développement</span><div class="cover-peek"><span>Voir la fiche</span></div></div>
+      <div class="book-info"><div class="book-category">Développement Personnel</div><div class="book-title" onclick="openDesc(4)">La Loi de la Semence</div><div class="book-author">par <a class="author-link" onclick="openDesc(4,1)">Frederic Goulia</a></div><div class="book-price">4,99 $ <span>Kindle</span></div><div class="rent-price">📖 Location dès 0,99 $</div></div>
+      <div class="card-actions">
+        <button class="btn-buy-here" onclick="openDesc(4,2)">🛒 Obtenir cette œuvre</button>
+        <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('La Loi de la Semence')">📖 Louer</button><a class="btn-download" href="https://pub-phgedition.r2.dev/livres/loi-semence.pdf" download>⬇ PDF</a></div>
+        <button class="btn-desc" onclick="openDesc(4)">📄 Description & Auteur</button>
+      </div>
+    </div>
+
+    <div class="book-card" data-category="developpement">
+      <div class="book-cover" onclick="openDesc(5)"><div class="book-cover-placeholder"><div class="placeholder-title">La Violence Humaine</div><div class="placeholder-line"></div><div class="placeholder-author">Frederic Richard Goulia</div></div><span class="book-badge">Développement</span><div class="cover-peek"><span>Voir la fiche</span></div></div>
+      <div class="book-info"><div class="book-category">Développement · Psychologie</div><div class="book-title" onclick="openDesc(5)">La Violence Humaine</div><div class="book-author">par <a class="author-link" onclick="openDesc(5,1)">Frederic Richard Goulia</a></div><div class="book-price">9,99 $ <span>Kindle</span></div><div class="rent-price">📖 Location dès 1,99 $</div></div>
+      <div class="card-actions">
+        <button class="btn-buy-here" onclick="openDesc(5,2)">🛒 Obtenir cette œuvre</button>
+        <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('La Violence Humaine')">📖 Louer</button><a class="btn-download" href="https://pub-phgedition.r2.dev/livres/violence-humaine.pdf" download>⬇ PDF</a></div>
+        <button class="btn-desc" onclick="openDesc(5)">📄 Description & Auteur</button>
+      </div>
+    </div>
+
+    <div class="book-card" data-category="spirituel">
+      <div class="book-cover" onclick="openDesc(6)"><div class="book-cover-placeholder"><div class="placeholder-title">Le Grand Secret</div><div class="placeholder-line"></div><div class="placeholder-author">Frederic Goulia</div></div><span class="book-badge">Spirituel</span><div class="cover-peek"><span>Voir la fiche</span></div></div>
+      <div class="book-info"><div class="book-category">Spirituel · Ésotérisme</div><div class="book-title" onclick="openDesc(6)">Le Grand Secret</div><div class="book-author">par <a class="author-link" onclick="openDesc(6,1)">Frederic Goulia</a></div><div class="book-price">5,99 $ <span>Kindle</span></div><div class="rent-price">📖 Location dès 1,49 $</div></div>
+      <div class="card-actions">
+        <button class="btn-buy-here" onclick="openDesc(6,2)">🛒 Obtenir cette œuvre</button>
+        <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('Le Grand Secret')">📖 Louer</button><a class="btn-download" href="https://pub-phgedition.r2.dev/livres/grand-secret.pdf" download>⬇ PDF</a></div>
+        <button class="btn-desc" onclick="openDesc(6)">📄 Description & Auteur</button>
+      </div>
+    </div>
+
+    <div class="book-card" data-category="business">
+      <div class="book-cover" onclick="openDesc(7)"><div class="book-cover-placeholder"><div class="placeholder-title">La Manifestation de l'Explosion de ma Vie Financière</div><div class="placeholder-line"></div><div class="placeholder-author">Frederic Richard Goulia</div></div><span class="book-badge">Business</span><div class="cover-peek"><span>Voir la fiche</span></div></div>
+      <div class="book-info"><div class="book-category">Business · Finance</div><div class="book-title" onclick="openDesc(7)">La Manifestation de l'Explosion de ma Vie Financière</div><div class="book-author">par <a class="author-link" onclick="openDesc(7,1)">Frederic Richard Goulia</a></div><div class="book-price">19,99 $ <span>Broché</span></div><div class="rent-price">📖 Location dès 2,99 $</div></div>
+      <div class="card-actions">
+        <button class="btn-buy-here" onclick="openDesc(7,2)">🛒 Obtenir cette œuvre</button>
+        <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('La Manifestation de l\'Explosion')">📖 Louer</button><a class="btn-download" href="https://pub-phgedition.r2.dev/livres/manifestation-explosion.pdf" download>⬇ PDF</a></div>
+        <button class="btn-desc" onclick="openDesc(7)">📄 Description & Auteur</button>
+      </div>
+    </div>
+
+    <div class="book-card" data-category="business">
+      <div class="book-cover" onclick="openDesc(8)"><div class="book-cover-placeholder"><div class="placeholder-title">L'Afrique et la Civilisation du Futur</div><div class="placeholder-line"></div><div class="placeholder-author">Frederic Goulia</div></div><span class="book-badge">Business</span><div class="cover-peek"><span>Voir la fiche</span></div></div>
+      <div class="book-info"><div class="book-category">Business · Géopolitique</div><div class="book-title" onclick="openDesc(8)">L'Afrique et la Civilisation du Futur</div><div class="book-author">par <a class="author-link" onclick="openDesc(8,1)">Frederic Goulia</a></div><div class="book-price">9,99 $ <span>Kindle</span></div><div class="rent-price">📖 Location dès 1,99 $</div></div>
+      <div class="card-actions">
+        <button class="btn-buy-here" onclick="openDesc(8,2)">🛒 Obtenir cette œuvre</button>
+        <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('L\'Afrique et la Civilisation du Futur')">📖 Louer</button><a class="btn-download" href="https://pub-phgedition.r2.dev/livres/afrique-civilisation-futur.pdf" download>⬇ PDF</a></div>
+        <button class="btn-desc" onclick="openDesc(8)">📄 Description & Auteur</button>
+      </div>
+    </div>
+
+    <div class="book-card" data-category="business">
+      <div class="book-cover" onclick="openDesc(9)"><img src="https://pub-phgedition.r2.dev/covers/dernier-pauvre-famille.jpg" alt="Le Dernier Pauvre de la Famille" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" /><div class="book-cover-placeholder" style="display:none;"><div class="placeholder-title">Le Dernier Pauvre de la Famille</div><div class="placeholder-line"></div><div class="placeholder-author">Frederic Richard Goulia</div></div><span class="book-badge">Business</span><div class="cover-peek"><span>Voir la fiche</span></div></div>
+      <div class="book-info"><div class="book-category">Business · Finance</div><div class="book-title" onclick="openDesc(9)">Le Dernier Pauvre de la Famille</div><div class="book-author">par <a class="author-link" onclick="openDesc(9,1)">Frederic Richard Goulia</a></div><div class="book-price">14,99 $ <span>Broché</span></div><div class="rent-price">📖 Location dès 2,49 $</div></div>
+      <div class="card-actions">
+        <button class="btn-buy-here" onclick="openDesc(9,2)">🛒 Obtenir cette œuvre</button>
+        <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('Le Dernier Pauvre de la Famille')">📖 Louer</button><a class="btn-download" href="https://pub-phgedition.r2.dev/livres/dernier-pauvre-famille.pdf" download>⬇ PDF</a></div>
+        <button class="btn-desc" onclick="openDesc(9)">📄 Description & Auteur</button>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
-  <div class="modal" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModal()">âœ•</button>
-    <div id="modal-content"></div>
+<!-- ══ MODAL FICHE ŒUVRE ══ -->
+<div class="modal-overlay" id="desc-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeDesc()">✕</button>
+    <div class="desc-hero">
+      <div class="desc-cover-box"><span id="desc-icon">📖</span></div>
+      <div class="desc-meta">
+        <span class="desc-cat-badge" id="desc-cat-badge"></span>
+        <div class="desc-full-title" id="desc-full-title"></div>
+        <div class="desc-author-name" id="desc-author-name"></div>
+        <div class="desc-price-row">
+          <div class="desc-price-main" id="desc-price-main"></div>
+          <div class="desc-rent-info" id="desc-rent-info"></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-body">
+      <div class="desc-tabs">
+        <button class="desc-tab active" onclick="switchTab(0)">Description</button>
+        <button class="desc-tab" onclick="switchTab(1)">Auteur &amp; Liens</button>
+        <button class="desc-tab" onclick="switchTab(2)">Obtenir l'œuvre</button>
+        <button class="desc-tab" onclick="switchTab(3)">⭐ Avis</button>
+      </div>
+      <!-- TAB 0 : Description -->
+      <div class="desc-tab-content active" id="tab-desc">
+        <div class="desc-text" id="desc-text"></div>
+        <div class="desc-tags" id="desc-tags"></div>
+      </div>
+      <!-- TAB 1 : Auteur -->
+      <div class="desc-tab-content" id="tab-author">
+        <div class="author-profile">
+          <div class="author-avatar" id="author-avatar">👤</div>
+          <div>
+            <div class="author-info-name" id="author-info-name"></div>
+            <div class="author-info-bio" id="author-info-bio"></div>
+          </div>
+        </div>
+        <div class="author-links" id="author-links"></div>
+      </div>
+      <!-- TAB 2 : Accès -->
+      <div class="desc-tab-content" id="tab-access">
+        <div class="access-options" id="access-options"></div>
+      </div>
+      <!-- TAB 3 : Avis -->
+      <div class="desc-tab-content" id="tab-reviews">
+        <div class="reviews-summary">
+          <div class="reviews-score">
+            <div class="score-big" id="rev-score">4.8</div>
+            <div class="score-stars" id="rev-stars">⭐⭐⭐⭐⭐</div>
+            <div class="score-count" id="rev-count">0 avis</div>
+          </div>
+          <div class="reviews-bars" id="rev-bars"></div>
+        </div>
+        <div class="review-list" id="review-list"></div>
+        <div class="review-form" id="review-form">
+          <h4>Laisser un avis</h4>
+          <div class="star-picker" id="star-picker">
+            <button class="star-btn" data-v="1" onclick="pickStar(1)">★</button>
+            <button class="star-btn" data-v="2" onclick="pickStar(2)">★</button>
+            <button class="star-btn" data-v="3" onclick="pickStar(3)">★</button>
+            <button class="star-btn" data-v="4" onclick="pickStar(4)">★</button>
+            <button class="star-btn" data-v="5" onclick="pickStar(5)">★</button>
+          </div>
+          <div class="form-group"><input class="form-input" id="rev-name" type="text" placeholder="Votre prénom *" /></div>
+          <div class="form-group"><textarea class="form-input" id="rev-text" placeholder="Votre avis sur cette œuvre…" style="min-height:80px;resize:vertical;"></textarea></div>
+          <button class="btn-submit-review" onclick="submitReview()">Publier mon avis</button>
+          <div class="review-success" id="review-success">✅ Merci pour votre avis ! Il sera affiché après modération.</div>
+        </div>
+      </div>
+
+<div class="modal-overlay" id="rent-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeRentModal()">✕</button>
+    <h2>📖 Louer l'œuvre</h2>
+    <p class="modal-book-title" id="rent-book-title"></p>
+    <div class="modal-options">
+      <div class="rent-option selected" onclick="selectRent(this)"><label>7 jours<small>Accès complet pendant 7 jours</small></label><span class="rent-opt-price">1,99 $</span></div>
+      <div class="rent-option" onclick="selectRent(this)"><label>30 jours<small>Accès complet pendant 30 jours</small></label><span class="rent-opt-price">3,99 $</span></div>
+      <div class="rent-option" onclick="selectRent(this)"><label>Lecture en ligne<small>Streaming immédiat, sans téléchargement</small></label><span class="rent-opt-price">0,99 $</span></div>
+    </div>
+    <input class="modal-email" type="email" placeholder="Votre adresse email" />
+    <button class="btn-confirm" onclick="confirmRent()">Confirmer et payer</button>
+    <p class="modal-note">Paiement sécurisé via Stripe. Accès envoyé par email immédiatement.</p>
   </div>
 </div>
 
-<script src="../js/config.js"></script>
+<!-- ══ MODAL PUBLICATION ══ -->
+<div class="modal-overlay" id="upload-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeUploadModal()">✕</button>
+    <h2>📤 Publier mon œuvre</h2>
+    <div class="upload-steps">
+      <span class="upload-step-label active" id="step-label-0">① Fichier</span>
+      <span class="upload-step-label" id="step-label-1">② Informations</span>
+      <span class="upload-step-label" id="step-label-2">③ Auteur &amp; Liens</span>
+      <span class="upload-step-label" id="step-label-3">④ Accès &amp; Prix</span>
+    </div>
+
+    <!-- ÉTAPE 1 : Fichier -->
+    <div class="upload-step active" id="upload-step-0">
+      <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
+        <div class="upload-icon-big">📁</div>
+        <h3>Déposer votre fichier</h3>
+        <p>Cliquez ou glissez votre fichier ici<br><span style="font-size:0.7rem;">PDF · EPUB · MOBI · Max 50 Mo</span></p>
+        <div class="upload-file-name" id="upload-file-name"></div>
+        <input type="file" id="file-input" accept=".pdf,.epub,.mobi" onchange="handleFileSelect(event)" />
+      </div>
+      <div class="upload-nav"><button class="btn-next" onclick="nextStep()">Continuer →</button></div>
+    </div>
+
+    <!-- ÉTAPE 2 : Informations -->
+    <div class="upload-step" id="upload-step-1">
+      <div class="form-group"><label class="form-label">Titre de l'œuvre *</label><input class="form-input" id="up-title" type="text" placeholder="Le titre complet" /></div>
+      <div class="form-group"><label class="form-label">Sous-titre (optionnel)</label><input class="form-input" id="up-subtitle" type="text" placeholder="Sous-titre ou accroche" /></div>
+      <div class="form-group"><label class="form-label">Catégorie *</label>
+        <select class="form-input" id="up-category"><option value="">— Choisir —</option><option>Roman</option><option>Business</option><option>Développement</option><option>Spirituel</option><option>Poésie</option><option>Autre</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Description *</label><textarea class="form-input" id="up-description" placeholder="Résumé, thèmes, public cible de votre œuvre…"></textarea></div>
+      <div class="form-group"><label class="form-label">Mots-clés (séparés par des virgules)</label><input class="form-input" id="up-tags" type="text" placeholder="Finance, Liberté, Afrique…" /></div>
+      <div class="upload-nav"><button class="btn-prev" onclick="prevStep()">← Retour</button><button class="btn-next" onclick="nextStep()">Continuer →</button></div>
+    </div>
+
+    <!-- ÉTAPE 3 : Auteur & Liens -->
+    <div class="upload-step" id="upload-step-2">
+      <div class="form-group"><label class="form-label">Nom de l'auteur *</label><input class="form-input" id="up-author" type="text" placeholder="Votre nom complet" /></div>
+      <div class="form-group"><label class="form-label">Biographie courte</label><textarea class="form-input" id="up-bio" placeholder="Qui êtes-vous ? Votre parcours, vos thèmes de prédilection…" style="min-height:70px;"></textarea></div>
+      <div class="form-group">
+        <label class="form-label">Vos liens (site, réseaux, chaîne…)</label>
+        <div class="links-section">
+          <div class="link-row"><select class="form-input"><option>🌐 Site web</option><option>📺 YouTube</option><option>📸 Instagram</option><option>💼 LinkedIn</option><option>🎵 TikTok</option><option>📘 Facebook</option><option>🐦 X / Twitter</option></select><input class="form-input" type="url" placeholder="https://monsite.com" /></div>
+          <div id="extra-links"></div>
+          <button class="btn-add-link" onclick="addLink()">+ Ajouter un lien</button>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">Email auteur *</label><input class="form-input" id="up-email" type="email" placeholder="contact@monsite.com" /></div>
+      <div class="upload-nav"><button class="btn-prev" onclick="prevStep()">← Retour</button><button class="btn-next" onclick="nextStep()">Continuer →</button></div>
+    </div>
+
+    <!-- ÉTAPE 4 : Accès & Prix -->
+    <div class="upload-step" id="upload-step-3">
+      <div style="font-size:0.78rem;color:var(--white-muted);margin-bottom:1rem;line-height:1.7;">Choisissez comment les lecteurs peuvent accéder à votre œuvre. Vous pouvez activer plusieurs options.</div>
+      <div class="access-toggles">
+        <div class="toggle-row on" id="toggle-buy">
+          <label>Achat direct sur PHG AKHENATON<small>Le lecteur achète et télécharge depuis cette plateforme</small></label>
+          <label class="toggle-switch"><input type="checkbox" checked onchange="toggleAccess('buy',this)"><span class="slider"></span></label>
+        </div>
+        <div class="price-inline show" id="price-buy"><input class="form-input" type="number" placeholder="Prix (€)" style="max-width:120px;" /><span>€ · achat unique</span></div>
+        <div class="toggle-row" id="toggle-rent">
+          <label>Location / Streaming<small>Accès temporaire ou lecture en ligne</small></label>
+          <label class="toggle-switch"><input type="checkbox" onchange="toggleAccess('rent',this)"><span class="slider"></span></label>
+        </div>
+        <div class="price-inline" id="price-rent"><input class="form-input" type="number" placeholder="Prix location (€)" style="max-width:120px;" /><span>€ / 7 jours</span></div>
+        <div class="toggle-row" id="toggle-free">
+          <label>Accès gratuit<small>Disponible librement pour tous les lecteurs</small></label>
+          <label class="toggle-switch"><input type="checkbox" onchange="toggleAccess('free',this)"><span class="slider"></span></label>
+        </div>
+        <div class="toggle-row" id="toggle-amazon">
+          <label>Également sur Amazon / autre plateforme<small>Afficher un lien externe en complément</small></label>
+          <label class="toggle-switch"><input type="checkbox" onchange="toggleAccess('amazon',this)"><span class="slider"></span></label>
+        </div>
+        <div class="price-inline" id="price-amazon"><input class="form-input" type="url" placeholder="https://amazon.fr/dp/..." /><span style="white-space:nowrap;">lien externe</span></div>
+      </div>
+      <div class="upload-progress" id="upload-progress"><div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div><p class="progress-text" id="progress-text"></p></div>
+      <div class="upload-nav"><button class="btn-prev" onclick="prevStep()">← Retour</button><button class="btn-next" onclick="submitUpload()">✅ Publier mon œuvre</button></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <strong>PHG AKHENATON IA</strong> · GULRISCH EMPIRE · PHARAOH GOLD PHG ÉDITIONS<br>
+  <span style="margin-top:0.4rem;display:block;">© 2026 Frédéric Richard Goulia — Tous droits réservés</span>
+</footer>
+
 <script>
-function renderBookCard(book) {
-      const amazon = book.lien_amazon || book.lienAmazon || `https://www.amazon.fr/s?k=${encodeURIComponent((book.titre||'') + ' Goulia')}`;
-      return `<div class="book-card" style="cursor:pointer;border:1px solid rgba(212,168,50,0.3);border-radius:12px;padding:1.5rem;background:#111;color:#fff;">
-        <div style="font-size:3rem;text-align:center;margin-bottom:1rem;">📖</div>
-        <h3 style="color:#C9A84C;font-family:Cinzel,serif;margin-bottom:0.5rem;font-size:1rem;">${book.titre||book.title||'Sans titre'}</h3>
-        <p style="color:#aaa;font-size:0.85rem;margin-bottom:0.5rem;">${book.auteur||book.author||'PHG Éditions'}</p>
-        <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">${book.description||''}</p>
-        <p style="color:#C9A84C;font-weight:bold;margin-bottom:1rem;">${book.prix||book.price||''}</p>
-        <a href="${amazon}" target="_blank" style="display:block;text-align:center;background:#C9A84C;color:#000;padding:0.6rem;border-radius:6px;text-decoration:none;font-weight:bold;">Voir sur Amazon</a>
-      </div>`;
-    }
+const BOOKS = [
+  { title:"Les 48 Lois de Zarek l'Archiviste", fullTitle:"Les 48 Lois de Zarek l'Archiviste : Voir, comprendre et maîtriser les règles invisibles du pouvoir", author:"Frederic Goulia", category:"Roman · Stratégie", price:"6,99 $", format:"Kindle", rentFrom:"1,99 $", amazon:"https://www.amazon.fr/dp/B0H2GVHNZ8", icon:"⚔️",
+    description:"Dans l'Empire d'Azyra, le pouvoir ne se prend pas — il se comprend. Zarek l'Archiviste, gardien des mémoires interdites, a distillé 48 lois à travers complots, trahisons et révélations. Ce roman stratégique fusionne fiction épique et sagesse intemporelle pour transformer votre regard sur le pouvoir et l'influence.",
+    tags:["Pouvoir","Stratégie","Empire","Philosophie","Roman épique"],
+    authorBio:"Frédéric Richard Goulia est entrepreneur, auteur et fondateur du GULRISCH Empire. À travers ses œuvres, il explore les lois invisibles du pouvoir, la liberté financière et la renaissance du continent africain.",
+    authorLinks:[{type:"🌐",label:"GULRISCH Empire",url:"https://gulrisch.com"},{type:"📘",label:"PHG ÉDITIONS",url:"https://pharaohgold.com"},{type:"📺",label:"YouTube — Pharaoh Gold",url:"https://youtube.com"}],
+    access:{ buyHere:true, buyPrice:"6,99 €", rent:true, rentPrice:"1,99 € / 7 jours", stream:true, streamPrice:"0,99 €", free:false, external:[{label:"Amazon Kindle",url:"https://www.amazon.fr/dp/B0H2GVHNZ8"},{label:"Amazon Broché",url:"https://www.amazon.fr/dp/B0H22F32KK"}] } },
 
-    function renderDefaultBooks() {
-      const livres = [
-        {titre:"Les 48 Lois de Zarek l'Archiviste", auteur:"Frédéric Richard Goulia", prix:"6,02 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
-        {titre:"De Rien à la Liberté", auteur:"Frédéric Richard Goulia", prix:"7,76 €", lienAmazon:"https://www.amazon.fr/dp/B0GVZM1FX9"},
-        {titre:"Le Figuier de Canaan", auteur:"Frédéric Richard Goulia", prix:"5,16 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
-        {titre:"La Manifestation de l'Explosion de ma Vie Financière", auteur:"Frédéric Richard Goulia", prix:"18,16 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"},
-        {titre:"Le Dernier Pauvre de la Famille", auteur:"Frédéric Richard Goulia", prix:"13,48 €", lienAmazon:"https://www.amazon.fr/dp/B0H1RTKSKG"},
-        {titre:"L'Eldorado des Ombres", auteur:"Frédéric Richard Goulia", prix:"9,99 €", lienAmazon:"https://www.amazon.fr/dp/B0H1V2WDYC"},
-        {titre:"Le Grand Secret", auteur:"Frédéric Richard Goulia", prix:"5,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GVHH3KZ8"},
-        {titre:"La Violence Humaine", auteur:"Frédéric Richard Goulia", prix:"8,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GW643C9N"},
-        {titre:"L'Afrique et la Civilisation du Futur", auteur:"Frédéric Richard Goulia", prix:"14,99 €", lienAmazon:"https://www.amazon.fr/s?k=Afrique+Civilisation+Futur+Goulia"},
-        {titre:"La Loi de la Semence", auteur:"Frédéric Richard Goulia", prix:"21,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"}
-      ];
-      return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">${livres.map(renderBookCard).join('')}</div>`;
-    }
-</script>
-<script src="../js/api.js">    function renderBookCard(book) {
-      const amazon = book.lien_amazon || book.lienAmazon || `https://www.amazon.fr/s?k=${encodeURIComponent((book.titre||'') + ' Goulia')}`;
-      return `<div class="book-card" style="cursor:pointer;border:1px solid rgba(212,168,50,0.3);border-radius:12px;padding:1.5rem;background:#111;color:#fff;">
-        <div style="font-size:3rem;text-align:center;margin-bottom:1rem;">📖</div>
-        <h3 style="color:#C9A84C;font-family:Cinzel,serif;margin-bottom:0.5rem;font-size:1rem;">${book.titre||book.title||'Sans titre'}</h3>
-        <p style="color:#aaa;font-size:0.85rem;margin-bottom:0.5rem;">${book.auteur||book.author||'PHG Éditions'}</p>
-        <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">${book.description||''}</p>
-        <p style="color:#C9A84C;font-weight:bold;margin-bottom:1rem;">${book.prix||book.price||''}</p>
-        <a href="${amazon}" target="_blank" style="display:block;text-align:center;background:#C9A84C;color:#000;padding:0.6rem;border-radius:6px;text-decoration:none;font-weight:bold;">Voir sur Amazon</a>
-      </div>`;
-    }
+  { title:"Le Figuier de Canaan", fullTitle:"Le Figuier de Canaan : Les Paraboles du Cœur — Un voyage entre amour, épreuves et sagesse cachée des anciens", author:"Frederic Goulia", category:"Roman · Spirituel", price:"5,99 $", format:"Kindle", rentFrom:"1,49 $", amazon:"https://www.amazon.fr/dp/B0H2S4FVMH", icon:"🌿",
+    description:"Un voyage initiatique en paraboles. À travers des histoires d'amour, de trahison et de renaissance, l'auteur tisse une tapisserie de sagesse puisée dans les traditions des anciens. Chaque récit est une graine plantée dans l'âme du lecteur — une vérité cachée qui ne se révèle qu'à ceux qui savent lire entre les lignes.",
+    tags:["Amour","Sagesse","Spiritualité","Paraboles","Initiation"],
+    authorBio:"Frédéric Richard Goulia est entrepreneur, auteur et fondateur du GULRISCH Empire. À travers ses œuvres, il explore les lois invisibles du pouvoir, la liberté financière et la renaissance du continent africain.",
+    authorLinks:[{type:"🌐",label:"GULRISCH Empire",url:"https://gulrisch.com"},{type:"📘",label:"PHG ÉDITIONS",url:"https://pharaohgold.com"}],
+    access:{ buyHere:true, buyPrice:"5,99 €", rent:true, rentPrice:"1,49 € / 7 jours", stream:true, streamPrice:"0,99 €", free:false, external:[{label:"Amazon Kindle",url:"https://www.amazon.fr/dp/B0H2S4FVMH"},{label:"Amazon Broché",url:"https://www.amazon.fr/dp/B0H2RMFSVT"}] } },
 
-    function renderDefaultBooks() {
-      const livres = [
-        {titre:"Les 48 Lois de Zarek l'Archiviste", auteur:"Frédéric Richard Goulia", prix:"6,02 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
-        {titre:"De Rien à la Liberté", auteur:"Frédéric Richard Goulia", prix:"7,76 €", lienAmazon:"https://www.amazon.fr/dp/B0GVZM1FX9"},
-        {titre:"Le Figuier de Canaan", auteur:"Frédéric Richard Goulia", prix:"5,16 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
-        {titre:"La Manifestation de l'Explosion de ma Vie Financière", auteur:"Frédéric Richard Goulia", prix:"18,16 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"},
-        {titre:"Le Dernier Pauvre de la Famille", auteur:"Frédéric Richard Goulia", prix:"13,48 €", lienAmazon:"https://www.amazon.fr/dp/B0H1RTKSKG"},
-        {titre:"L'Eldorado des Ombres", auteur:"Frédéric Richard Goulia", prix:"9,99 €", lienAmazon:"https://www.amazon.fr/dp/B0H1V2WDYC"},
-        {titre:"Le Grand Secret", auteur:"Frédéric Richard Goulia", prix:"5,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GVHH3KZ8"},
-        {titre:"La Violence Humaine", auteur:"Frédéric Richard Goulia", prix:"8,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GW643C9N"},
-        {titre:"L'Afrique et la Civilisation du Futur", auteur:"Frédéric Richard Goulia", prix:"14,99 €", lienAmazon:"https://www.amazon.fr/s?k=Afrique+Civilisation+Futur+Goulia"},
-        {titre:"La Loi de la Semence", auteur:"Frédéric Richard Goulia", prix:"21,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"}
-      ];
-      return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">${livres.map(renderBookCard).join('')}</div>`;
-    }
-</script>
-<script src="../js/auth.js">    function renderBookCard(book) {
-      const amazon = book.lien_amazon || book.lienAmazon || `https://www.amazon.fr/s?k=${encodeURIComponent((book.titre||'') + ' Goulia')}`;
-      return `<div class="book-card" style="cursor:pointer;border:1px solid rgba(212,168,50,0.3);border-radius:12px;padding:1.5rem;background:#111;color:#fff;">
-        <div style="font-size:3rem;text-align:center;margin-bottom:1rem;">📖</div>
-        <h3 style="color:#C9A84C;font-family:Cinzel,serif;margin-bottom:0.5rem;font-size:1rem;">${book.titre||book.title||'Sans titre'}</h3>
-        <p style="color:#aaa;font-size:0.85rem;margin-bottom:0.5rem;">${book.auteur||book.author||'PHG Éditions'}</p>
-        <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">${book.description||''}</p>
-        <p style="color:#C9A84C;font-weight:bold;margin-bottom:1rem;">${book.prix||book.price||''}</p>
-        <a href="${amazon}" target="_blank" style="display:block;text-align:center;background:#C9A84C;color:#000;padding:0.6rem;border-radius:6px;text-decoration:none;font-weight:bold;">Voir sur Amazon</a>
-      </div>`;
-    }
+  { title:"L'Eldorado des Ombres", fullTitle:"L'Eldorado des Ombres : Ils sont partis pour vivre. Ils ont trouvé l'enfer.", author:"Frederic Goulia", category:"Roman", price:"9,99 $", format:"Kindle", rentFrom:"1,99 $", amazon:"https://www.amazon.fr/dp/B0GZSJN5Q6", icon:"🌑",
+    description:"Ils avaient tout quitté pour trouver mieux. Ils ont trouvé pire. Un roman brut et sans concession sur une génération sacrifiée sur l'autel du rêve occidental. Des jeunes piégés dans des réseaux d'exploitation et de désillusion. Un livre qui secoue les consciences et questionne le prix réel de nos ambitions.",
+    tags:["Migration","Survie","Désillusion","Roman noir","Réalisme"],
+    authorBio:"Frédéric Richard Goulia est entrepreneur, auteur et fondateur du GULRISCH Empire. Il est aussi étudiant à l'Université de Genève.",
+    authorLinks:[{type:"🌐",label:"GULRISCH Empire",url:"https://gulrisch.com"},{type:"📘",label:"PHG ÉDITIONS",url:"https://pharaohgold.com"}],
+    access:{ buyHere:true, buyPrice:"9,99 €", rent:true, rentPrice:"1,99 € / 7 jours", stream:true, streamPrice:"0,99 €", free:false, external:[{label:"Amazon Kindle",url:"https://www.amazon.fr/dp/B0GZSJN5Q6"},{label:"Amazon Broché",url:"https://www.amazon.fr/dp/B0H1V2WDYC"}] } },
 
-    function renderDefaultBooks() {
-      const livres = [
-        {titre:"Les 48 Lois de Zarek l'Archiviste", auteur:"Frédéric Richard Goulia", prix:"6,02 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
-        {titre:"De Rien à la Liberté", auteur:"Frédéric Richard Goulia", prix:"7,76 €", lienAmazon:"https://www.amazon.fr/dp/B0GVZM1FX9"},
-        {titre:"Le Figuier de Canaan", auteur:"Frédéric Richard Goulia", prix:"5,16 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
-        {titre:"La Manifestation de l'Explosion de ma Vie Financière", auteur:"Frédéric Richard Goulia", prix:"18,16 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"},
-        {titre:"Le Dernier Pauvre de la Famille", auteur:"Frédéric Richard Goulia", prix:"13,48 €", lienAmazon:"https://www.amazon.fr/dp/B0H1RTKSKG"},
-        {titre:"L'Eldorado des Ombres", auteur:"Frédéric Richard Goulia", prix:"9,99 €", lienAmazon:"https://www.amazon.fr/dp/B0H1V2WDYC"},
-        {titre:"Le Grand Secret", auteur:"Frédéric Richard Goulia", prix:"5,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GVHH3KZ8"},
-        {titre:"La Violence Humaine", auteur:"Frédéric Richard Goulia", prix:"8,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GW643C9N"},
-        {titre:"L'Afrique et la Civilisation du Futur", auteur:"Frédéric Richard Goulia", prix:"14,99 €", lienAmazon:"https://www.amazon.fr/s?k=Afrique+Civilisation+Futur+Goulia"},
-        {titre:"La Loi de la Semence", auteur:"Frédéric Richard Goulia", prix:"21,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"}
-      ];
-      return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">${livres.map(renderBookCard).join('')}</div>`;
-    }
-</script>
-<script src="../js/main.js">    function renderBookCard(book) {
-      const amazon = book.lien_amazon || book.lienAmazon || `https://www.amazon.fr/s?k=${encodeURIComponent((book.titre||'') + ' Goulia')}`;
-      return `<div class="book-card" style="cursor:pointer;border:1px solid rgba(212,168,50,0.3);border-radius:12px;padding:1.5rem;background:#111;color:#fff;">
-        <div style="font-size:3rem;text-align:center;margin-bottom:1rem;">📖</div>
-        <h3 style="color:#C9A84C;font-family:Cinzel,serif;margin-bottom:0.5rem;font-size:1rem;">${book.titre||book.title||'Sans titre'}</h3>
-        <p style="color:#aaa;font-size:0.85rem;margin-bottom:0.5rem;">${book.auteur||book.author||'PHG Éditions'}</p>
-        <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">${book.description||''}</p>
-        <p style="color:#C9A84C;font-weight:bold;margin-bottom:1rem;">${book.prix||book.price||''}</p>
-        <a href="${amazon}" target="_blank" style="display:block;text-align:center;background:#C9A84C;color:#000;padding:0.6rem;border-radius:6px;text-decoration:none;font-weight:bold;">Voir sur Amazon</a>
-      </div>`;
-    }
+  { title:"De Rien à la Liberté", fullTitle:"De Rien à la Liberté : Comment passer de zéro à la liberté financière", author:"Frederic Richard Goulia", category:"Développement · Finance", price:"8,99 $", format:"Kindle", rentFrom:"1,99 $", amazon:"https://www.amazon.fr/dp/B0FSKRFV65", icon:"💰",
+    description:"Né d'une expérience vécue : partir de rien, sans réseau ni capital, et construire une liberté financière réelle. Une méthode concrète et accessible — gestion des revenus, investissement progressif, création de valeur. Sans jargon inutile, sans promesses irréalistes. La feuille de route que l'auteur aurait voulu avoir à ses débuts.",
+    tags:["Finance","Liberté financière","Investissement","Méthode","Débutants"],
+    authorBio:"Frédéric Richard Goulia est entrepreneur, trader et auteur. Il partage sa vision de la liberté financière à travers ses livres et le GULRISCH Empire.",
+    authorLinks:[{type:"🌐",label:"GULRISCH Empire",url:"https://gulrisch.com"},{type:"📘",label:"PHG ÉDITIONS",url:"https://pharaohgold.com"}],
+    access:{ buyHere:true, buyPrice:"8,99 €", rent:true, rentPrice:"1,99 € / 7 jours", stream:true, streamPrice:"0,99 €", free:false, external:[{label:"Amazon Kindle",url:"https://www.amazon.fr/dp/B0FSKRFV65"},{label:"Amazon Broché",url:"https://www.amazon.fr/dp/B0GVZM1FX9"}] } },
 
-    function renderDefaultBooks() {
-      const livres = [
-        {titre:"Les 48 Lois de Zarek l'Archiviste", auteur:"Frédéric Richard Goulia", prix:"6,02 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
-        {titre:"De Rien à la Liberté", auteur:"Frédéric Richard Goulia", prix:"7,76 €", lienAmazon:"https://www.amazon.fr/dp/B0GVZM1FX9"},
-        {titre:"Le Figuier de Canaan", auteur:"Frédéric Richard Goulia", prix:"5,16 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
-        {titre:"La Manifestation de l'Explosion de ma Vie Financière", auteur:"Frédéric Richard Goulia", prix:"18,16 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"},
-        {titre:"Le Dernier Pauvre de la Famille", auteur:"Frédéric Richard Goulia", prix:"13,48 €", lienAmazon:"https://www.amazon.fr/dp/B0H1RTKSKG"},
-        {titre:"L'Eldorado des Ombres", auteur:"Frédéric Richard Goulia", prix:"9,99 €", lienAmazon:"https://www.amazon.fr/dp/B0H1V2WDYC"},
-        {titre:"Le Grand Secret", auteur:"Frédéric Richard Goulia", prix:"5,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GVHH3KZ8"},
-        {titre:"La Violence Humaine", auteur:"Frédéric Richard Goulia", prix:"8,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GW643C9N"},
-        {titre:"L'Afrique et la Civilisation du Futur", auteur:"Frédéric Richard Goulia", prix:"14,99 €", lienAmazon:"https://www.amazon.fr/s?k=Afrique+Civilisation+Futur+Goulia"},
-        {titre:"La Loi de la Semence", auteur:"Frédéric Richard Goulia", prix:"21,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"}
-      ];
-      return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">${livres.map(renderBookCard).join('')}</div>`;
-    }
-</script>
-<script>
-  let allBooks = [];
-  let currentFilter = 'all';
+  { title:"La Loi de la Semence", fullTitle:"La Loi de la Semence : Comment la discipline, l'investissement et le temps transforment une vie", author:"Frederic Goulia", category:"Développement Personnel", price:"4,99 $", format:"Kindle", rentFrom:"0,99 $", amazon:"https://www.amazon.fr/dp/B0GV3LF3JV", icon:"🌱",
+    description:"Toute grande récolte commence par une petite graine plantée dans le silence. Ce livre explore le principe fondamental de toute réussite durable : ce que vous semez aujourd'hui dans la discipline et l'action, vous le récoltez demain, multiplié. Un manifeste pour ceux qui veulent bâtir sur du solide.",
+    tags:["Discipline","Croissance","Temps","Investissement de soi","Patience"],
+    authorBio:"Frédéric Richard Goulia explore à travers ses livres les lois invisibles qui gouvernent la réussite personnelle et financière.",
+    authorLinks:[{type:"🌐",label:"GULRISCH Empire",url:"https://gulrisch.com"},{type:"📘",label:"PHG ÉDITIONS",url:"https://pharaohgold.com"}],
+    access:{ buyHere:true, buyPrice:"4,99 €", rent:true, rentPrice:"0,99 € / 7 jours", stream:true, streamPrice:"0,49 €", free:false, external:[{label:"Amazon Kindle",url:"https://www.amazon.fr/dp/B0GV3LF3JV"},{label:"Amazon Broché",url:"https://www.amazon.fr/dp/B0GV1X5JRW"}] } },
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    await loadAllBooks();
-  });
+  { title:"La Violence Humaine", fullTitle:"La Violence Humaine : Comprendre les mécanismes, prévenir et se reconstruire", author:"Frederic Richard Goulia", category:"Développement · Psychologie", price:"9,99 $", format:"Kindle", rentFrom:"1,99 $", amazon:"https://www.amazon.fr/dp/B0DZ1CR6NM", icon:"🔍",
+    description:"Une exploration rigoureuse et sans tabou des racines de la violence — psychologique, physique, sociale. Ce livre propose des outils concrets pour identifier les schémas destructeurs, prévenir les cycles de violence et accompagner la reconstruction. Essentiel pour éducateurs, thérapeutes, parents et quiconque veut comprendre pour agir.",
+    tags:["Psychologie","Prévention","Reconstruction","Trauma","Relations"],
+    authorBio:"Frédéric Richard Goulia s'intéresse aux mécanismes profonds du comportement humain et à la transformation personnelle.",
+    authorLinks:[{type:"🌐",label:"GULRISCH Empire",url:"https://gulrisch.com"},{type:"📘",label:"PHG ÉDITIONS",url:"https://pharaohgold.com"}],
+    access:{ buyHere:true, buyPrice:"9,99 €", rent:true, rentPrice:"1,99 € / 7 jours", stream:true, streamPrice:"0,99 €", free:false, external:[{label:"Amazon Kindle",url:"https://www.amazon.fr/dp/B0DZ1CR6NM"},{label:"Amazon Broché",url:"https://www.amazon.fr/dp/B0GW643C9N"}] } },
 
-  async function loadAllBooks() {
-    const grid = document.getElementById('books-grid');
-    try {
-      allBooks = await API.get('/oeuvres/?limit=50');
-      renderGrid(allBooks);
-    } catch (e) {
-      grid.innerHTML = renderDefaultBooks();
-    }
-  }
+  { title:"Le Grand Secret", fullTitle:"Le Grand Secret : Ce que les loges, les initiés et les sages ont gardé — et que l'humanité mérite de savoir", author:"Frederic Goulia", category:"Spirituel · Ésotérisme", price:"5,99 $", format:"Kindle", rentFrom:"1,49 $", amazon:"https://www.amazon.fr/dp/B0GV3L1SVL", icon:"🔮",
+    description:"Depuis des millénaires, une vérité circule en silence à travers les loges secrètes et les cercles de sages. Dans ce livre, l'auteur lève le voile sur les principes universels que les élites ont toujours connus : la loi de l'attraction, la maîtrise de l'énergie, le pouvoir de la conscience. Ce que les initiés savent, vous méritez de le savoir.",
+    tags:["Ésotérisme","Initiation","Conscience","Lois universelles","Savoir caché"],
+    authorBio:"Frédéric Richard Goulia puise dans les traditions initiatiques et la sagesse universelle pour éveiller ses lecteurs à des vérités longtemps gardées secrètes.",
+    authorLinks:[{type:"🌐",label:"GULRISCH Empire",url:"https://gulrisch.com"},{type:"📘",label:"PHG ÉDITIONS",url:"https://pharaohgold.com"}],
+    access:{ buyHere:true, buyPrice:"5,99 €", rent:true, rentPrice:"1,49 € / 7 jours", stream:true, streamPrice:"0,99 €", free:false, external:[{label:"Amazon Kindle",url:"https://www.amazon.fr/dp/B0GV3L1SVL"},{label:"Amazon Broché",url:"https://www.amazon.fr/dp/B0GVHH3KZ8"}] } },
 
-  function filterBy(cat, btn) {
-    currentFilter = cat;
+  { title:"La Manifestation de l'Explosion de ma Vie Financière", fullTitle:"La Manifestation de l'Explosion de ma Vie Financière : Le jour où nous avons décidé de changer", author:"Frederic Richard Goulia", category:"Business · Finance", price:"19,99 $", format:"Broché", rentFrom:"2,99 $", amazon:"https://www.amazon.fr/dp/B0H3MXW2N6", icon:"🚀",
+    description:"Il y a un jour précis où tout bascule — le jour où l'on décide vraiment de changer. Ce livre raconte ce tournant et offre une méthode complète pour déclencher une explosion financière. À travers des stratégies de manifestation, de mindset et d'action concrète, il guide vers une transformation profonde de sa relation à l'argent et à l'abondance.",
+    tags:["Manifestation","Mindset","Abondance","Transformation","Finance"],
+    authorBio:"Frédéric Richard Goulia partage sa méthode de transformation financière à travers ses livres, ses formations et le GULRISCH Empire.",
+    authorLinks:[{type:"🌐",label:"GULRISCH Empire",url:"https://gulrisch.com"},{type:"📘",label:"PHG ÉDITIONS",url:"https://pharaohgold.com"}],
+    access:{ buyHere:true, buyPrice:"19,99 €", rent:true, rentPrice:"2,99 € / 7 jours", stream:true, streamPrice:"1,49 €", free:false, external:[{label:"Amazon Broché",url:"https://www.amazon.fr/dp/B0H3MXW2N6"}] } },
+
+  { title:"L'Afrique et la Civilisation du Futur", fullTitle:"L'Afrique et la Civilisation du Futur : 21 Fondamentaux pour Construire un Continent", author:"Frederic Goulia", category:"Business · Géopolitique", price:"9,99 $", format:"Kindle", rentFrom:"1,99 $", amazon:"https://www.amazon.fr/dp/B0H26TF8Y7", icon:"🌍",
+    description:"Un manifeste stratégique pour le renouveau continental, articulé autour de 21 fondamentaux : éducation, entrepreneuriat, technologie, souveraineté monétaire, unité culturelle et vision géopolitique. Une vision lucide et ambitieuse d'un continent qui cesse de subir pour définir les règles du jeu mondial.",
+    tags:["Afrique","Géopolitique","Entrepreneuriat","Vision","Développement"],
+    authorBio:"Frédéric Richard Goulia est l'un des penseurs de la nouvelle économie africaine. Son GULRISCH Empire incarne cette vision d'un continent bâtisseur.",
+    authorLinks:[{type:"🌐",label:"GULRISCH Empire",url:"https://gulrisch.com"},{type:"📘",label:"PHG ÉDITIONS",url:"https://pharaohgold.com"}],
+    access:{ buyHere:true, buyPrice:"9,99 €", rent:true, rentPrice:"1,99 € / 7 jours", stream:true, streamPrice:"0,99 €", free:false, external:[{label:"Amazon Kindle",url:"https://www.amazon.fr/dp/B0H26TF8Y7"},{label:"Amazon Broché",url:"https://www.amazon.fr/dp/B0H2V29SKM"}] } },
+
+  { title:"Le Dernier Pauvre de la Famille", fullTitle:"Le Dernier Pauvre de la Famille : Pourquoi 90% ne deviendront jamais financièrement libres", author:"Frederic Richard Goulia", category:"Business · Finance", price:"14,99 $", format:"Broché", rentFrom:"2,49 $", amazon:"https://www.amazon.fr/dp/B0H1RTKSKG", icon:"💡",
+    description:"Être le dernier pauvre de sa famille, c'est une position inconfortable — mais une opportunité unique. Ce livre démonte les croyances limitantes qui maintiennent 90% des gens dans la précarité génération après génération : pièges mentaux, culturels et systémiques. Un chemin clair pour devenir le premier bâtisseur de patrimoine de sa lignée.",
+    tags:["Richesse","Héritage","Croyances limitantes","Famille","Patrimoine"],
+    authorBio:"Frédéric Richard Goulia décrypte les mécanismes cachés de la richesse et de la pauvreté pour aider ses lecteurs à briser les cycles transgénérationnels.",
+    authorLinks:[{type:"🌐",label:"GULRISCH Empire",url:"https://gulrisch.com"},{type:"📘",label:"PHG ÉDITIONS",url:"https://pharaohgold.com"}],
+    access:{ buyHere:true, buyPrice:"14,99 €", rent:true, rentPrice:"2,49 € / 7 jours", stream:true, streamPrice:"1,49 €", free:false, external:[{label:"Amazon Broché",url:"https://www.amazon.fr/dp/B0H1RTKSKG"}] } }
+];
+
+// ── FILTERS ──
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const filtered = cat === 'all' ? allBooks : allBooks.filter(o => o.categorie === cat);
-    renderGrid(filtered);
-  }
+    const f = btn.dataset.filter; let v = 0;
+    document.querySelectorAll('.book-card').forEach(c => {
+      const m = f === 'all' || c.dataset.category === f;
+      c.classList.toggle('hidden', !m); if (m) v++;
+    });
+    document.getElementById('results-count').textContent = v + (v > 1 ? ' œuvres disponibles' : ' œuvre disponible');
+  });
+});
 
-  function searchBooks(q) {
-    const filtered = allBooks.filter(o =>
-      o.titre.toLowerCase().includes(q.toLowerCase()) ||
-      (o.description || '').toLowerCase().includes(q.toLowerCase())
-    );
-    renderGrid(filtered);
-  }
+// ── TABS ──
+let activeTab = 0;
+function switchTab(i) {
+  document.querySelectorAll('.desc-tab').forEach((t,idx) => t.classList.toggle('active', idx===i));
+  document.querySelectorAll('.desc-tab-content').forEach((c,idx) => c.classList.toggle('active', idx===i));
+  activeTab = i;
+}
 
-  function renderGrid(books) {
-    const grid = document.getElementById('books-grid');
-    if (!books.length) {
-      grid.innerHTML = '<div class="loading-placeholder">Aucune Å“uvre trouvÃ©e.</div>';
-      return;
-    }
-    grid.innerHTML = books.map(renderBookCard).join('');
+// ── DESC MODAL ──
+function openDesc(i, tab=0) {
+  const b = BOOKS[i];
+  document.getElementById('desc-icon').textContent = b.icon;
+  document.getElementById('desc-cat-badge').textContent = b.category;
+  document.getElementById('desc-full-title').textContent = b.fullTitle;
+  document.getElementById('desc-author-name').innerHTML = 'par <a href="' + (b.authorLinks[0]?.url||'#') + '" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-weight:600;">' + b.author + ' ↗</a>';
+  document.getElementById('desc-price-main').innerHTML = b.price + ' <small>' + b.format + '</small>';
+  document.getElementById('desc-rent-info').textContent = '📖 Location dès ' + b.rentFrom;
+  document.getElementById('desc-text').textContent = b.description;
+  document.getElementById('desc-tags').innerHTML = b.tags.map(t=>`<span class="desc-tag">${t}</span>`).join('');
+  // Author tab
+  document.getElementById('author-info-name').textContent = b.author;
+  document.getElementById('author-info-bio').textContent = b.authorBio;
+  document.getElementById('author-links').innerHTML = b.authorLinks.map(l =>
+    `<a class="author-ext-link" href="${l.url}" target="_blank" rel="noopener"><span class="link-icon">${l.type}</span><div><div class="link-label">${l.label}</div><div class="link-url">${l.url}</div></div></a>`
+  ).join('');
+  // Access tab
+  const ac = b.access;
+  let html = '';
+  if (ac.buyHere) html += `<div class="access-option primary"><div class="access-opt-info"><div class="access-opt-label">🛒 Acheter sur PHG AKHENATON</div><div class="access-opt-desc">Téléchargement immédiat · Votre achat soutient directement l'auteur</div></div><div class="access-opt-price">${ac.buyPrice}</div><button class="access-opt-btn gold" onclick="alert('Redirection paiement Stripe…')">Acheter</button></div>`;
+  if (ac.rent) html += `<div class="access-option"><div class="access-opt-info"><div class="access-opt-label">📖 Louer l'œuvre</div><div class="access-opt-desc">Accès complet pendant 7 jours</div></div><div class="access-opt-price">${ac.rentPrice}</div><button class="access-opt-btn outline" onclick="closeDesc();openRentModal('${b.title.replace(/'/g,"\\'")}')">Louer</button></div>`;
+  if (ac.stream) html += `<div class="access-option"><div class="access-opt-info"><div class="access-opt-label">▶ Lire en ligne</div><div class="access-opt-desc">Streaming immédiat, sans téléchargement</div></div><div class="access-opt-price">${ac.streamPrice}</div><button class="access-opt-btn outline" onclick="alert('Redirection streaming…')">Lire</button></div>`;
+  if (ac.free) html += `<div class="access-option"><div class="access-opt-info"><div class="access-opt-label">🆓 Accès gratuit</div><div class="access-opt-desc">L'auteur offre cette œuvre librement</div></div><div class="access-opt-price">Gratuit</div><a class="access-opt-btn gold" href="#">Télécharger</a></div>`;
+  if (ac.external && ac.external.length) {
+    html += '<div class="access-divider"><span>aussi disponible sur</span></div>';
+    ac.external.forEach(e => { html += `<div class="access-option"><div class="access-opt-info"><div class="access-opt-label">🔗 ${e.label}</div><div class="access-opt-desc">Plateforme externe — quitte PHG AKHENATON</div></div><a class="access-opt-btn ghost" href="${e.url}" target="_blank" rel="noopener">Voir ↗</a></div>`; });
   }
-    function renderBookCard(book) {
-      const amazon = book.lien_amazon || book.lienAmazon || `https://www.amazon.fr/s?k=${encodeURIComponent((book.titre||'') + ' Goulia')}`;
-      return `<div class="book-card" style="cursor:pointer;border:1px solid rgba(212,168,50,0.3);border-radius:12px;padding:1.5rem;background:#111;color:#fff;">
-        <div style="font-size:3rem;text-align:center;margin-bottom:1rem;">📖</div>
-        <h3 style="color:#C9A84C;font-family:Cinzel,serif;margin-bottom:0.5rem;font-size:1rem;">${book.titre||book.title||'Sans titre'}</h3>
-        <p style="color:#aaa;font-size:0.85rem;margin-bottom:0.5rem;">${book.auteur||book.author||'PHG Éditions'}</p>
-        <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">${book.description||''}</p>
-        <p style="color:#C9A84C;font-weight:bold;margin-bottom:1rem;">${book.prix||book.price||''}</p>
-        <a href="${amazon}" target="_blank" style="display:block;text-align:center;background:#C9A84C;color:#000;padding:0.6rem;border-radius:6px;text-decoration:none;font-weight:bold;">Voir sur Amazon</a>
-      </div>`;
-    }
+  document.getElementById('access-options').innerHTML = html;
+  currentBookIndex = i;
+  renderReviews(i);
+  switchTab(tab);
+  document.getElementById('desc-modal').classList.add('open');
+}
+function closeDesc() { document.getElementById('desc-modal').classList.remove('open'); }
 
-    function renderDefaultBooks() {
-      const livres = [
-        {titre:"Les 48 Lois de Zarek l'Archiviste", auteur:"Frédéric Richard Goulia", prix:"6,02 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
-        {titre:"De Rien à la Liberté", auteur:"Frédéric Richard Goulia", prix:"7,76 €", lienAmazon:"https://www.amazon.fr/dp/B0GVZM1FX9"},
-        {titre:"Le Figuier de Canaan", auteur:"Frédéric Richard Goulia", prix:"5,16 €", lienAmazon:"https://www.amazon.fr/dp/B0H22F32KK"},
-        {titre:"La Manifestation de l'Explosion de ma Vie Financière", auteur:"Frédéric Richard Goulia", prix:"18,16 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"},
-        {titre:"Le Dernier Pauvre de la Famille", auteur:"Frédéric Richard Goulia", prix:"13,48 €", lienAmazon:"https://www.amazon.fr/dp/B0H1RTKSKG"},
-        {titre:"L'Eldorado des Ombres", auteur:"Frédéric Richard Goulia", prix:"9,99 €", lienAmazon:"https://www.amazon.fr/dp/B0H1V2WDYC"},
-        {titre:"Le Grand Secret", auteur:"Frédéric Richard Goulia", prix:"5,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GVHH3KZ8"},
-        {titre:"La Violence Humaine", auteur:"Frédéric Richard Goulia", prix:"8,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GW643C9N"},
-        {titre:"L'Afrique et la Civilisation du Futur", auteur:"Frédéric Richard Goulia", prix:"14,99 €", lienAmazon:"https://www.amazon.fr/s?k=Afrique+Civilisation+Futur+Goulia"},
-        {titre:"La Loi de la Semence", auteur:"Frédéric Richard Goulia", prix:"21,99 €", lienAmazon:"https://www.amazon.fr/dp/B0GV1X5JRW"}
-      ];
-      return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">${livres.map(renderBookCard).join('')}</div>`;
+// ── RENT ──
+function openRentModal(title) { document.getElementById('rent-book-title').textContent = title; document.getElementById('rent-modal').classList.add('open'); }
+function closeRentModal() { document.getElementById('rent-modal').classList.remove('open'); }
+function selectRent(el) { document.querySelectorAll('.rent-option').forEach(o=>o.classList.remove('selected')); el.classList.add('selected'); }
+function confirmRent() {
+  const email = document.querySelector('.modal-email').value.trim();
+  if (!email||!email.includes('@')) { alert('Email invalide.'); return; }
+  const p = document.querySelector('.rent-option.selected .rent-opt-price')?.textContent||'';
+  alert('✅ Redirection Stripe ('+p+')…\nAccès envoyé à : '+email); closeRentModal();
+}
+
+// ── UPLOAD (multi-step) ──
+let currentStep = 0;
+function openUploadModal() { currentStep=0; showStep(0); document.getElementById('upload-modal').classList.add('open'); }
+function closeUploadModal() { document.getElementById('upload-modal').classList.remove('open'); }
+function showStep(n) {
+  document.querySelectorAll('.upload-step').forEach((s,i) => s.classList.toggle('active', i===n));
+  document.querySelectorAll('.upload-step-label').forEach((l,i) => {
+    l.classList.toggle('active', i===n); l.classList.toggle('done', i<n);
+  });
+}
+function nextStep() {
+  if (currentStep < 3) { currentStep++; showStep(currentStep); }
+}
+function prevStep() {
+  if (currentStep > 0) { currentStep--; showStep(currentStep); }
+}
+function handleFileSelect(e) { const f=e.target.files[0]; if(f) document.getElementById('upload-file-name').textContent='✅ '+f.name; }
+const zone = document.getElementById('upload-zone');
+zone.addEventListener('dragover',e=>{e.preventDefault();zone.style.borderColor='var(--gold)';});
+zone.addEventListener('dragleave',()=>{zone.style.borderColor='var(--gold-dark)';});
+zone.addEventListener('drop',e=>{e.preventDefault();zone.style.borderColor='var(--gold-dark)';const f=e.dataTransfer.files[0];if(f)document.getElementById('upload-file-name').textContent='✅ '+f.name;});
+function addLink() {
+  const d=document.getElementById('extra-links');
+  d.innerHTML+=`<div class="link-row"><select class="form-input"><option>🌐 Site web</option><option>📺 YouTube</option><option>📸 Instagram</option><option>💼 LinkedIn</option><option>🎵 TikTok</option><option>📘 Facebook</option></select><input class="form-input" type="url" placeholder="https://..." /></div>`;
+}
+function toggleAccess(type, cb) {
+  const row=document.getElementById('toggle-'+type);
+  row.classList.toggle('on', cb.checked);
+  const price=document.getElementById('price-'+type);
+  if(price) price.classList.toggle('show', cb.checked);
+}
+const API_URL = 'https://phg-akhenaton-backend-production.up.railway.app';
+
+async function submitUpload() {
+  const title  = document.getElementById('up-title').value.trim();
+  const author = document.getElementById('up-author').value.trim();
+  const email  = document.getElementById('up-email').value.trim();
+  if (!title || !author || !email) { alert('Remplissez tous les champs obligatoires (*).'); return; }
+  const fileInput = document.getElementById('file-input');
+  if (!fileInput.files[0]) { alert('Sélectionnez votre fichier (PDF/EPUB/MOBI).'); return; }
+
+  const prog = document.getElementById('upload-progress');
+  const fill = document.getElementById('progress-fill');
+  const txt  = document.getElementById('progress-text');
+  prog.style.display = 'block';
+  fill.style.width = '10%';
+  txt.textContent = 'Préparation de l\'envoi…';
+
+  const fd = new FormData();
+  fd.append('fichier',       fileInput.files[0]);
+  fd.append('titre',         title);
+  fd.append('sous_titre',    document.getElementById('up-subtitle').value.trim());
+  fd.append('categorie',     document.getElementById('up-category').value);
+  fd.append('description',   document.getElementById('up-description').value.trim());
+  fd.append('tags',          document.getElementById('up-tags').value.trim());
+  fd.append('auteur',        author);
+  fd.append('biographie',    document.getElementById('up-bio').value.trim());
+  fd.append('email_auteur',  email);
+
+  // Liens auteur
+  const liens = [];
+  document.querySelectorAll('#upload-step-2 .link-row').forEach(row => {
+    const type = row.querySelector('select')?.value || '';
+    const url  = row.querySelector('input[type="url"]')?.value.trim() || '';
+    if (url) liens.push({ type, url });
+  });
+  fd.append('liens_auteur', JSON.stringify(liens));
+
+  // Accès & Prix
+  const prixAchat  = document.querySelector('#price-buy input')?.value;
+  const prixLoc    = document.querySelector('#price-rent input')?.value;
+  const gratuit    = document.getElementById('toggle-free')?.classList.contains('on');
+  const externe    = document.querySelector('#price-amazon input')?.value.trim() || '';
+  if (prixAchat) fd.append('prix_achat',    prixAchat);
+  if (prixLoc)   fd.append('prix_location', prixLoc);
+  fd.append('acces_gratuit', gratuit);
+  fd.append('lien_externe',  externe);
+
+  // Progression animée
+  let p = 10;
+  const iv = setInterval(() => {
+    p += Math.random() * 8;
+    if (p > 85) clearInterval(iv);
+    fill.style.width = Math.min(p, 85) + '%';
+    txt.textContent = 'Envoi en cours… ' + Math.round(Math.min(p, 85)) + '%';
+  }, 400);
+
+  try {
+    const res = await fetch(`${API_URL}/upload/oeuvre`, { method: 'POST', body: fd });
+    clearInterval(iv);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ detail: 'Erreur serveur' }));
+      throw new Error(err.detail || 'Erreur serveur');
     }
+    const data = await res.json();
+    fill.style.width = '100%';
+    txt.textContent = '✅ ' + data.message;
+    setTimeout(closeUploadModal, 3000);
+  } catch (err) {
+    clearInterval(iv);
+    fill.style.background = '#c0392b';
+    txt.textContent = '❌ ' + err.message;
+  }
+}
+
+// ── REVIEWS ──
+const SAMPLE_REVIEWS = {
+  0: [
+    { name:"Kouamé A.", stars:5, date:"Juin 2026", text:"Un roman stratégique hors du commun. Les 48 lois sont distillées avec une précision chirurgicale dans une fiction épique. Je l'ai relu deux fois.", verified:true },
+    { name:"Mariam D.", stars:5, date:"Mai 2026", text:"L'Empire d'Azyra est un univers fascinant. On apprend autant sur le pouvoir que dans un essai de philosophie, mais avec le plaisir d'un roman.", verified:true },
+    { name:"Jean-Paul K.", stars:4, date:"Avril 2026", text:"Très bon livre, quelques passages un peu denses mais l'ensemble est captivant et riche en enseignements.", verified:false }
+  ],
+  1: [
+    { name:"Fatou N.", stars:5, date:"Juin 2026", text:"Les paraboles touchent directement au cœur. J'ai pleuré à plusieurs reprises. Une œuvre qui restera longtemps en moi.", verified:true },
+    { name:"Serge B.", stars:4, date:"Mai 2026", text:"Une écriture poétique et profonde. Chaque parabole cache une leçon de vie que l'on découvre progressivement.", verified:true }
+  ],
+  2: [
+    { name:"Ange M.", stars:5, date:"Juin 2026", text:"Un roman qui fait mal et qui réveille. La réalité de l'immigration est dépeinte sans filtre. Courageux et nécessaire.", verified:true },
+    { name:"Christelle O.", stars:4, date:"Mai 2026", text:"Bouleversant. L'auteur ne mâche pas ses mots et c'est ce qui rend ce livre si puissant.", verified:true }
+  ]
+};
+// Default sample for books without specific reviews
+const DEFAULT_REVIEWS = [
+  { name:"Lecteur PHG", stars:5, date:"Juin 2026", text:"Une œuvre de qualité qui mérite d'être lue. Frédéric Goulia a encore une fois livré quelque chose d'exceptionnel.", verified:true }
+];
+
+let currentBookIndex = 0;
+let selectedStar = 0;
+let userReviews = {}; // stored per book index
+
+function starsHtml(n) { return '⭐'.repeat(n) + '☆'.repeat(5-n); }
+
+function renderReviews(i) {
+  const base = SAMPLE_REVIEWS[i] || DEFAULT_REVIEWS;
+  const extra = userReviews[i] || [];
+  const all = [...extra, ...base];
+  const total = all.length;
+  const avg = total ? (all.reduce((s,r)=>s+r.stars,0)/total).toFixed(1) : '—';
+
+  document.getElementById('rev-score').textContent = avg;
+  document.getElementById('rev-stars').textContent = avg >= 1 ? starsHtml(Math.round(parseFloat(avg))) : '—';
+  document.getElementById('rev-count').textContent = total + (total > 1 ? ' avis' : ' avis');
+
+  // bars
+  const counts = [5,4,3,2,1].map(s => all.filter(r=>r.stars===s).length);
+  document.getElementById('rev-bars').innerHTML = [5,4,3,2,1].map((s,idx) => {
+    const pct = total ? Math.round(counts[idx]/total*100) : 0;
+    return `<div class="bar-row"><span class="bar-label">${s}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="bar-pct">${pct}%</span></div>`;
+  }).join('');
+
+  // list
+  document.getElementById('review-list').innerHTML = all.map(r => `
+    <div class="review-item">
+      <div class="review-header">
+        <div class="review-author-row"><div class="review-avatar">${r.name[0]}</div><div><div class="review-name">${r.name}</div><div class="review-date">${r.date}</div></div></div>
+        <div class="review-stars">${starsHtml(r.stars)}</div>
+      </div>
+      <div class="review-text">${r.text}</div>
+      ${r.verified ? '<div class="review-verified">✔ Achat vérifié</div>' : ''}
+    </div>
+  `).join('');
+
+  // reset form
+  selectedStar = 0;
+  document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('rev-name').value = '';
+  document.getElementById('rev-text').value = '';
+  document.getElementById('review-success').style.display = 'none';
+  document.getElementById('review-form').style.display = 'block';
+}
+
+function pickStar(n) {
+  selectedStar = n;
+  document.querySelectorAll('.star-btn').forEach(b => b.classList.toggle('active', parseInt(b.dataset.v) <= n));
+}
+
+function submitReview() {
+  const name = document.getElementById('rev-name').value.trim();
+  const text = document.getElementById('rev-text').value.trim();
+  if (!name || !text) { alert('Veuillez remplir votre prénom et votre avis.'); return; }
+  if (!selectedStar) { alert('Veuillez choisir une note (étoiles).'); return; }
+  if (!userReviews[currentBookIndex]) userReviews[currentBookIndex] = [];
+  userReviews[currentBookIndex].unshift({ name, stars: selectedStar, date: 'Aujourd\'hui', text, verified: false });
+  renderReviews(currentBookIndex);
+  document.getElementById('review-form').style.display = 'none';
+  document.getElementById('review-success').style.display = 'block';
+}
+
+// ── CLOSE ON OVERLAY ──
+['desc-modal','rent-modal','upload-modal'].forEach(id=>{
+  document.getElementById(id).addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+});
 </script>
 </body>
 </html>
-
-
-
