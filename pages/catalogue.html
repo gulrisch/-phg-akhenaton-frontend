@@ -840,9 +840,9 @@ function openDesc(i, tab=0) {
   // Access tab
   const ac = b.access;
   let html = '';
-  if (ac.buyHere) html += `<div class="access-option primary"><div class="access-opt-info"><div class="access-opt-label">🛒 Acheter sur PHG AKHENATON</div><div class="access-opt-desc">Téléchargement immédiat · Votre achat soutient directement l'auteur</div></div><div class="access-opt-price">${ac.buyPrice}</div><button class="access-opt-btn gold" onclick="alert('Redirection paiement Stripe…')">Acheter</button></div>`;
+  if (ac.buyHere) html += `<div class="access-option primary"><div class="access-opt-info"><div class="access-opt-label">🛒 Acheter sur PHG AKHENATON</div><div class="access-opt-desc">Téléchargement immédiat · Votre achat soutient directement l'auteur</div></div><div class="access-opt-price">${ac.buyPrice}</div><button class="access-opt-btn gold" onclick="stripeCheckout(currentBookIndex, 'achat')">Acheter</button></div>`;
   if (ac.rent) html += `<div class="access-option"><div class="access-opt-info"><div class="access-opt-label">📖 Louer l'œuvre</div><div class="access-opt-desc">Accès complet pendant 7 jours</div></div><div class="access-opt-price">${ac.rentPrice}</div><button class="access-opt-btn outline" onclick="closeDesc();openRentModal('${b.title.replace(/'/g,"\\'")}')">Louer</button></div>`;
-  if (ac.stream) html += `<div class="access-option"><div class="access-opt-info"><div class="access-opt-label">▶ Lire en ligne</div><div class="access-opt-desc">Streaming immédiat, sans téléchargement</div></div><div class="access-opt-price">${ac.streamPrice}</div><button class="access-opt-btn outline" onclick="alert('Redirection streaming…')">Lire</button></div>`;
+  if (ac.stream) html += `<div class="access-option"><div class="access-opt-info"><div class="access-opt-label">▶ Lire en ligne</div><div class="access-opt-desc">Streaming immédiat, sans téléchargement</div></div><div class="access-opt-price">${ac.streamPrice}</div><button class="access-opt-btn outline" onclick="stripeCheckout(currentBookIndex, 'stream')">Lire</button></div>`;
   if (ac.free) html += `<div class="access-option"><div class="access-opt-info"><div class="access-opt-label">🆓 Accès gratuit</div><div class="access-opt-desc">L'auteur offre cette œuvre librement</div></div><div class="access-opt-price">Gratuit</div><a class="access-opt-btn gold" href="#">Télécharger</a></div>`;
   if (ac.external && ac.external.length) {
     html += '<div class="access-divider"><span>aussi disponible sur</span></div>';
@@ -969,6 +969,42 @@ async function submitUpload() {
     clearInterval(iv);
     fill.style.background = '#c0392b';
     txt.textContent = '❌ ' + err.message;
+  }
+}
+
+
+// ── STRIPE CHECKOUT ──
+const BACKEND = 'https://web-production-bca3f.up.railway.app';
+
+const STRIPE_BOOK_IDS = {
+  0: 'zarek-archiviste',
+  1: 'figuier-de-canaan', 
+  2: 'eldorado-ombres',
+  3: 'de-rien-a-la-liberte',
+  4: 'loi-semence',
+  5: 'violence-humaine',
+  6: 'grand-secret',
+  7: 'manifestation-explosion',
+  8: 'afrique-civilisation',
+  9: 'dernier-pauvre-famille'
+};
+
+async function stripeCheckout(bookIndex, mode) {
+  const bookId = STRIPE_BOOK_IDS[bookIndex];
+  if (!bookId) { alert('Livre introuvable'); return; }
+  try {
+    const fd = new FormData();
+    fd.append('book_id', bookId);
+    fd.append('mode', mode);
+    const res = await fetch(BACKEND + '/checkout', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.checkout_url) {
+      window.location.href = data.checkout_url;
+    } else {
+      alert('Erreur paiement: ' + JSON.stringify(data));
+    }
+  } catch(e) {
+    alert('Erreur connexion: ' + e.message);
   }
 }
 
