@@ -121,8 +121,6 @@
     .rent-price { font-size: 0.72rem; color: var(--gold-light); }
 
     .card-actions { display: flex; flex-direction: column; gap: 0.5rem; padding: 0 1rem 1rem; }
-
-    /* PRIMARY ACTION — achat direct sur PHG */
     .btn-buy-here {
       display: block; background: var(--gold); color: var(--black);
       font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
@@ -130,7 +128,6 @@
       border-radius: 2px; transition: background 0.2s; border: none; cursor: pointer; font-family: var(--font-body);
     }
     .btn-buy-here:hover { background: var(--gold-light); }
-
     .card-actions-row { display: flex; gap: 0.4rem; }
     .btn-rent {
       flex: 1; background: transparent; color: var(--gold);
@@ -148,7 +145,6 @@
       cursor: pointer; transition: all 0.2s; text-decoration: none; display: block;
     }
     .btn-download:hover { color: var(--white); border-color: var(--white-muted); }
-
     .btn-desc {
       background: transparent; color: var(--white-muted); border: none;
       font-family: var(--font-body); font-size: 0.64rem; font-weight: 500;
@@ -156,12 +152,9 @@
       cursor: pointer; text-decoration: underline; transition: color 0.2s;
     }
     .btn-desc:hover { color: var(--gold-light); }
-
     .book-card.hidden { display: none; }
 
-    /* ══════════════════════════════════
-       MODAL BASE
-    ══════════════════════════════════ */
+    /* MODAL BASE */
     .modal-overlay {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,0.90); z-index: 999;
@@ -180,11 +173,8 @@
     }
     .modal-close:hover { color: var(--white); }
 
-    /* ══════════════════════════════════
-       FICHE ŒUVRE (description)
-    ══════════════════════════════════ */
+    /* FICHE OEUVRE */
     #desc-modal .modal { max-width: 680px; padding: 0; overflow: hidden; }
-
     .desc-hero {
       background: linear-gradient(135deg, #1A1400, #0D0D00);
       padding: 2rem 2rem 1.5rem;
@@ -211,7 +201,6 @@
     .desc-price-main { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--gold); }
     .desc-price-main small { font-size: 0.65rem; font-family: var(--font-body); color: var(--white-muted); font-weight: 400; margin-left: 0.3rem; }
     .desc-rent-info { font-size: 0.72rem; color: var(--gold-light); }
-
     .desc-body { padding: 1.5rem 2rem; }
 
     /* TABS */
@@ -224,7 +213,6 @@
     .desc-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
     .desc-tab-content { display: none; }
     .desc-tab-content.active { display: block; }
-
     .desc-text { font-size: 0.87rem; color: var(--white-muted); line-height: 1.9; }
     .desc-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
     .desc-tag { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); border: 1px solid var(--black-border); padding: 0.2rem 0.6rem; border-radius: 1px; }
@@ -246,7 +234,7 @@
     .author-ext-link .link-url { font-size: 0.65rem; color: var(--white-muted); margin-top: 0.1rem; }
     .author-ext-link:hover .link-label { color: var(--gold); }
 
-    /* ACCÈS TAB */
+    /* ACCES TAB */
     .access-options { display: flex; flex-direction: column; gap: 0.8rem; }
     .access-option {
       border: 1px solid var(--black-border); border-radius: 3px; padding: 1rem 1.2rem;
@@ -272,9 +260,7 @@
     .access-divider::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--black-border); z-index: 0; }
     .access-divider span { background: var(--black-card); padding: 0 0.8rem; position: relative; z-index: 1; color: var(--white-muted); }
 
-    /* ══════════════════════════════════
-       RENT MODAL
-    ══════════════════════════════════ */
+    /* RENT MODAL */
     #rent-modal .modal { max-width: 420px; }
     .modal h2 { font-family: var(--font-display); font-size: 1.1rem; color: var(--gold); margin-bottom: 0.5rem; }
     .modal-book-title { font-size: 0.82rem; color: var(--white-muted); margin-bottom: 1.5rem; line-height: 1.4; }
@@ -294,18 +280,14 @@
     .btn-confirm:hover { background: var(--gold-light); }
     .modal-note { font-size: 0.65rem; color: var(--white-muted); text-align: center; margin-top: 0.8rem; line-height: 1.5; }
 
-    /* ══════════════════════════════════
-       UPLOAD MODAL
-    ══════════════════════════════════ */
+    /* UPLOAD MODAL */
     #upload-modal .modal { max-width: 520px; }
     .upload-steps { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid var(--black-border); }
     .upload-step-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white-muted); padding: 0.5rem 1rem; border-bottom: 2px solid transparent; margin-bottom: -1px; }
     .upload-step-label.active { color: var(--gold); border-bottom-color: var(--gold); }
     .upload-step-label.done { color: var(--gold-dark); }
-
     .upload-step { display: none; }
     .upload-step.active { display: block; }
-
     .upload-zone {
       border: 2px dashed var(--gold-dark); border-radius: 3px; padding: 2.5rem 2rem;
       text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s;
@@ -317,7 +299,6 @@
     .upload-zone p { font-size: 0.78rem; color: var(--white-muted); line-height: 1.6; }
     .upload-zone input[type="file"] { display: none; }
     .upload-file-name { font-size: 0.8rem; color: var(--gold); margin-top: 0.5rem; font-weight: 600; }
-
     .form-group { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 0.8rem; }
     .form-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white-muted); }
     .form-input {
@@ -328,16 +309,12 @@
     .form-input:focus { border-color: var(--gold-dark); }
     select.form-input option { background: #1A1A1A; }
     textarea.form-input { resize: vertical; min-height: 90px; line-height: 1.7; }
-
-    /* Site/liens auteur */
     .links-section { margin-top: 0.5rem; }
     .links-section .link-row { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
     .link-row .form-input { flex: 1; }
     .link-row select.form-input { max-width: 120px; }
     .btn-add-link { background: transparent; border: 1px dashed var(--gold-dark); color: var(--gold-dark); font-family: var(--font-body); font-size: 0.7rem; padding: 0.4rem 0.8rem; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
     .btn-add-link:hover { border-color: var(--gold); color: var(--gold); }
-
-    /* Access options for upload */
     .access-toggles { display: flex; flex-direction: column; gap: 0.6rem; }
     .toggle-row {
       display: flex; align-items: center; justify-content: space-between;
@@ -356,19 +333,17 @@
     .price-inline.show { display: flex; gap: 0.5rem; align-items: center; }
     .price-inline .form-input { max-width: 120px; }
     .price-inline span { font-size: 0.75rem; color: var(--white-muted); }
-
     .upload-progress { display: none; margin: 1rem 0; }
     .progress-bar { height: 4px; background: var(--black-border); border-radius: 2px; overflow: hidden; }
     .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.3s; }
     .progress-text { font-size: 0.7rem; color: var(--white-muted); margin-top: 0.5rem; text-align: center; }
-
     .upload-nav { display: flex; gap: 0.7rem; margin-top: 1.5rem; }
     .btn-next { flex: 1; background: var(--gold); color: var(--black); border: none; font-family: var(--font-body); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.8rem; border-radius: 2px; cursor: pointer; transition: background 0.2s; }
     .btn-next:hover { background: var(--gold-light); }
     .btn-prev { background: transparent; color: var(--white-muted); border: 1px solid var(--black-border); font-family: var(--font-body); font-size: 0.78rem; padding: 0.8rem 1.2rem; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
     .btn-prev:hover { color: var(--white); border-color: var(--white-muted); }
 
-    /* ══ AVIS ══ */
+    /* AVIS */
     .reviews-summary { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; padding: 1rem 1.2rem; background: rgba(201,168,76,0.04); border: 1px solid var(--black-border); border-radius: 3px; }
     .reviews-score { text-align: center; }
     .reviews-score .score-big { font-family: var(--font-display); font-size: 2.8rem; font-weight: 900; color: var(--gold); line-height: 1; }
@@ -380,7 +355,6 @@
     .bar-track { flex: 1; height: 5px; background: var(--black-border); border-radius: 3px; overflow: hidden; }
     .bar-fill { height: 100%; background: var(--gold); border-radius: 3px; transition: width 0.6s ease; }
     .bar-pct { font-size: 0.6rem; color: var(--white-muted); width: 28px; }
-
     .review-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.2rem; }
     .review-item { border: 1px solid var(--black-border); border-radius: 3px; padding: 1rem 1.2rem; }
     .review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.4rem; }
@@ -391,7 +365,6 @@
     .review-stars { font-size: 0.85rem; letter-spacing: 0.03em; }
     .review-text { font-size: 0.82rem; color: var(--white-muted); line-height: 1.75; }
     .review-verified { font-size: 0.62rem; color: var(--gold-dark); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.5rem; }
-
     .review-form { border: 1px solid var(--black-border); border-radius: 3px; padding: 1.2rem; background: rgba(201,168,76,0.02); }
     .review-form h4 { font-family: var(--font-display); font-size: 0.85rem; color: var(--white); margin-bottom: 1rem; }
     .star-picker { display: flex; gap: 0.3rem; margin-bottom: 0.8rem; }
@@ -455,7 +428,7 @@
       <div class="card-actions">
         <button class="btn-buy-here" onclick="openDesc(0,2)">🛒 Obtenir cette œuvre</button>
         <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('Les 48 Lois de Zarek l\'Archiviste')">📖 Louer</button><a class="btn-download" href="https://pub-1eeb31517baa4733a5ce9d63ac6a98aa.r2.dev/livres/zarek-archiviste.pdf" download>⬇ PDF</a></div>
-        <button class="btn-desc" onclick="openDesc(0)">📄 Description & Auteur</button>
+        <button class="btn-desc" onclick="openDesc(0)">📄 Description &amp; Auteur</button>
       </div>
     </div>
 
@@ -465,7 +438,7 @@
       <div class="card-actions">
         <button class="btn-buy-here" onclick="openDesc(1,2)">🛒 Obtenir cette œuvre</button>
         <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('Le Figuier de Canaan')">📖 Louer</button><a class="btn-download" href="https://pub-1eeb31517baa4733a5ce9d63ac6a98aa.r2.dev/livres/figuier-de-canaan.pdf" download>⬇ PDF</a></div>
-        <button class="btn-desc" onclick="openDesc(1)">📄 Description & Auteur</button>
+        <button class="btn-desc" onclick="openDesc(1)">📄 Description &amp; Auteur</button>
       </div>
     </div>
 
@@ -475,7 +448,7 @@
       <div class="card-actions">
         <button class="btn-buy-here" onclick="openDesc(2,2)">🛒 Obtenir cette œuvre</button>
         <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('L\'Eldorado des Ombres')">📖 Louer</button><a class="btn-download" href="https://pub-1eeb31517baa4733a5ce9d63ac6a98aa.r2.dev/livres/eldorado-ombres.pdf" download>⬇ PDF</a></div>
-        <button class="btn-desc" onclick="openDesc(2)">📄 Description & Auteur</button>
+        <button class="btn-desc" onclick="openDesc(2)">📄 Description &amp; Auteur</button>
       </div>
     </div>
 
@@ -485,7 +458,7 @@
       <div class="card-actions">
         <button class="btn-buy-here" onclick="openDesc(3,2)">🛒 Obtenir cette œuvre</button>
         <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('De Rien à la Liberté')">📖 Louer</button><a class="btn-download" href="https://pub-1eeb31517baa4733a5ce9d63ac6a98aa.r2.dev/livres/de-rien-à-la-liberté.pdf" download>⬇ PDF</a></div>
-        <button class="btn-desc" onclick="openDesc(3)">📄 Description & Auteur</button>
+        <button class="btn-desc" onclick="openDesc(3)">📄 Description &amp; Auteur</button>
       </div>
     </div>
 
@@ -495,7 +468,7 @@
       <div class="card-actions">
         <button class="btn-buy-here" onclick="openDesc(4,2)">🛒 Obtenir cette œuvre</button>
         <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('La Loi de la Semence')">📖 Louer</button><a class="btn-download" href="https://pub-1eeb31517baa4733a5ce9d63ac6a98aa.r2.dev/livres/loi-semence.pdf" download>⬇ PDF</a></div>
-        <button class="btn-desc" onclick="openDesc(4)">📄 Description & Auteur</button>
+        <button class="btn-desc" onclick="openDesc(4)">📄 Description &amp; Auteur</button>
       </div>
     </div>
 
@@ -505,7 +478,7 @@
       <div class="card-actions">
         <button class="btn-buy-here" onclick="openDesc(5,2)">🛒 Obtenir cette œuvre</button>
         <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('La Violence Humaine')">📖 Louer</button><a class="btn-download" href="https://pub-1eeb31517baa4733a5ce9d63ac6a98aa.r2.dev/livres/violence-humaine.pdf" download>⬇ PDF</a></div>
-        <button class="btn-desc" onclick="openDesc(5)">📄 Description & Auteur</button>
+        <button class="btn-desc" onclick="openDesc(5)">📄 Description &amp; Auteur</button>
       </div>
     </div>
 
@@ -515,7 +488,7 @@
       <div class="card-actions">
         <button class="btn-buy-here" onclick="openDesc(6,2)">🛒 Obtenir cette œuvre</button>
         <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('Le Grand Secret')">📖 Louer</button><a class="btn-download" href="https://pub-1eeb31517baa4733a5ce9d63ac6a98aa.r2.dev/livres/grand-secret.pdf" download>⬇ PDF</a></div>
-        <button class="btn-desc" onclick="openDesc(6)">📄 Description & Auteur</button>
+        <button class="btn-desc" onclick="openDesc(6)">📄 Description &amp; Auteur</button>
       </div>
     </div>
 
@@ -525,7 +498,7 @@
       <div class="card-actions">
         <button class="btn-buy-here" onclick="openDesc(7,2)">🛒 Obtenir cette œuvre</button>
         <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('La Manifestation de l\'Explosion')">📖 Louer</button><a class="btn-download" href="https://pub-1eeb31517baa4733a5ce9d63ac6a98aa.r2.dev/livres/manifestation-explosion.pdf" download>⬇ PDF</a></div>
-        <button class="btn-desc" onclick="openDesc(7)">📄 Description & Auteur</button>
+        <button class="btn-desc" onclick="openDesc(7)">📄 Description &amp; Auteur</button>
       </div>
     </div>
 
@@ -535,7 +508,7 @@
       <div class="card-actions">
         <button class="btn-buy-here" onclick="openDesc(8,2)">🛒 Obtenir cette œuvre</button>
         <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('L\'Afrique et la Civilisation du Futur')">📖 Louer</button><a class="btn-download" href="https://pub-1eeb31517baa4733a5ce9d63ac6a98aa.r2.dev/livres/afrique-civilisation-futur.pdf" download>⬇ PDF</a></div>
-        <button class="btn-desc" onclick="openDesc(8)">📄 Description & Auteur</button>
+        <button class="btn-desc" onclick="openDesc(8)">📄 Description &amp; Auteur</button>
       </div>
     </div>
 
@@ -545,14 +518,14 @@
       <div class="card-actions">
         <button class="btn-buy-here" onclick="openDesc(9,2)">🛒 Obtenir cette œuvre</button>
         <div class="card-actions-row"><button class="btn-rent" onclick="openRentModal('Le Dernier Pauvre de la Famille')">📖 Louer</button><a class="btn-download" href="https://pub-1eeb31517baa4733a5ce9d63ac6a98aa.r2.dev/livres/dernier-pauvre-famille.pdf" download>⬇ PDF</a></div>
-        <button class="btn-desc" onclick="openDesc(9)">📄 Description & Auteur</button>
+        <button class="btn-desc" onclick="openDesc(9)">📄 Description &amp; Auteur</button>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ══ MODAL FICHE ŒUVRE ══ -->
+<!-- ══ MODAL FICHE OEUVRE ══ -->
 <div class="modal-overlay" id="desc-modal">
   <div class="modal">
     <button class="modal-close" onclick="closeDesc()">✕</button>
@@ -620,8 +593,12 @@
           <button class="btn-submit-review" onclick="submitReview()">Publier mon avis</button>
           <div class="review-success" id="review-success">✅ Merci pour votre avis ! Il sera affiché après modération.</div>
         </div>
-      </div>
+      </div><!-- /#tab-reviews -->
+    </div><!-- /.desc-body -->
+  </div><!-- /.modal -->
+</div><!-- /#desc-modal ✅ -->
 
+<!-- ══ MODAL LOCATION ══ -->
 <div class="modal-overlay" id="rent-modal">
   <div class="modal">
     <button class="modal-close" onclick="closeRentModal()">✕</button>
@@ -636,7 +613,7 @@
     <button class="btn-confirm" onclick="confirmRent()">Confirmer et payer</button>
     <p class="modal-note">Paiement sécurisé via Stripe. Accès envoyé par email immédiatement.</p>
   </div>
-</div>
+</div><!-- /#rent-modal ✅ -->
 
 <!-- ══ MODAL PUBLICATION ══ -->
 <div class="modal-overlay" id="upload-modal">
@@ -650,7 +627,7 @@
       <span class="upload-step-label" id="step-label-3">④ Accès &amp; Prix</span>
     </div>
 
-    <!-- ÉTAPE 1 : Fichier -->
+    <!-- ÉTAPE 1 -->
     <div class="upload-step active" id="upload-step-0">
       <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
         <div class="upload-icon-big">📁</div>
@@ -662,7 +639,7 @@
       <div class="upload-nav"><button class="btn-next" onclick="nextStep()">Continuer →</button></div>
     </div>
 
-    <!-- ÉTAPE 2 : Informations -->
+    <!-- ÉTAPE 2 -->
     <div class="upload-step" id="upload-step-1">
       <div class="form-group"><label class="form-label">Titre de l'œuvre *</label><input class="form-input" id="up-title" type="text" placeholder="Le titre complet" /></div>
       <div class="form-group"><label class="form-label">Sous-titre (optionnel)</label><input class="form-input" id="up-subtitle" type="text" placeholder="Sous-titre ou accroche" /></div>
@@ -674,7 +651,7 @@
       <div class="upload-nav"><button class="btn-prev" onclick="prevStep()">← Retour</button><button class="btn-next" onclick="nextStep()">Continuer →</button></div>
     </div>
 
-    <!-- ÉTAPE 3 : Auteur & Liens -->
+    <!-- ÉTAPE 3 -->
     <div class="upload-step" id="upload-step-2">
       <div class="form-group"><label class="form-label">Nom de l'auteur *</label><input class="form-input" id="up-author" type="text" placeholder="Votre nom complet" /></div>
       <div class="form-group"><label class="form-label">Biographie courte</label><textarea class="form-input" id="up-bio" placeholder="Qui êtes-vous ? Votre parcours, vos thèmes de prédilection…" style="min-height:70px;"></textarea></div>
@@ -690,7 +667,7 @@
       <div class="upload-nav"><button class="btn-prev" onclick="prevStep()">← Retour</button><button class="btn-next" onclick="nextStep()">Continuer →</button></div>
     </div>
 
-    <!-- ÉTAPE 4 : Accès & Prix -->
+    <!-- ÉTAPE 4 -->
     <div class="upload-step" id="upload-step-3">
       <div style="font-size:0.78rem;color:var(--white-muted);margin-bottom:1rem;line-height:1.7;">Choisissez comment les lecteurs peuvent accéder à votre œuvre. Vous pouvez activer plusieurs options.</div>
       <div class="access-toggles">
@@ -718,7 +695,7 @@
       <div class="upload-nav"><button class="btn-prev" onclick="prevStep()">← Retour</button><button class="btn-next" onclick="submitUpload()">✅ Publier mon œuvre</button></div>
     </div>
   </div>
-</div>
+</div><!-- /#upload-modal ✅ -->
 
 <footer>
   <strong>PHG AKHENATON IA</strong> · GULRISCH EMPIRE · PHARAOH GOLD PHG ÉDITIONS<br>
@@ -798,7 +775,7 @@ const BOOKS = [
     access:{ buyHere:true, buyPrice:"14,99 €", rent:true, rentPrice:"2,49 € / 7 jours", stream:true, streamPrice:"1,49 €", free:false, external:[{label:"Amazon Broché",url:"https://www.amazon.fr/dp/B0H1RTKSKG"}] } }
 ];
 
-// ── FILTERS ──
+// FILTERS
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -812,7 +789,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-// ── TABS ──
+// TABS
 let activeTab = 0;
 function switchTab(i) {
   document.querySelectorAll('.desc-tab').forEach((t,idx) => t.classList.toggle('active', idx===i));
@@ -820,7 +797,7 @@ function switchTab(i) {
   activeTab = i;
 }
 
-// ── DESC MODAL ──
+// DESC MODAL
 function openDesc(i, tab=0) {
   const b = BOOKS[i];
   document.getElementById('desc-icon').textContent = b.icon;
@@ -831,13 +808,11 @@ function openDesc(i, tab=0) {
   document.getElementById('desc-rent-info').textContent = '📖 Location dès ' + b.rentFrom;
   document.getElementById('desc-text').textContent = b.description;
   document.getElementById('desc-tags').innerHTML = b.tags.map(t=>`<span class="desc-tag">${t}</span>`).join('');
-  // Author tab
   document.getElementById('author-info-name').textContent = b.author;
   document.getElementById('author-info-bio').textContent = b.authorBio;
   document.getElementById('author-links').innerHTML = b.authorLinks.map(l =>
     `<a class="author-ext-link" href="${l.url}" target="_blank" rel="noopener"><span class="link-icon">${l.type}</span><div><div class="link-label">${l.label}</div><div class="link-url">${l.url}</div></div></a>`
   ).join('');
-  // Access tab
   const ac = b.access;
   let html = '';
   if (ac.buyHere) html += `<div class="access-option primary"><div class="access-opt-info"><div class="access-opt-label">🛒 Acheter sur PHG AKHENATON</div><div class="access-opt-desc">Téléchargement immédiat · Votre achat soutient directement l'auteur</div></div><div class="access-opt-price">${ac.buyPrice}</div><button class="access-opt-btn gold" onclick="stripeCheckout(currentBookIndex, 'achat')">Acheter</button></div>`;
@@ -856,18 +831,18 @@ function openDesc(i, tab=0) {
 }
 function closeDesc() { document.getElementById('desc-modal').classList.remove('open'); }
 
-// ── RENT ──
+// RENT
 function openRentModal(title) { document.getElementById('rent-book-title').textContent = title; document.getElementById('rent-modal').classList.add('open'); }
 function closeRentModal() { document.getElementById('rent-modal').classList.remove('open'); }
 function selectRent(el) { document.querySelectorAll('.rent-option').forEach(o=>o.classList.remove('selected')); el.classList.add('selected'); }
 function confirmRent() {
-  const email = document.querySelector('.modal-email').value.trim();
+  const email = document.querySelector('#rent-modal .modal-email').value.trim();
   if (!email||!email.includes('@')) { alert('Email invalide.'); return; }
   const p = document.querySelector('.rent-option.selected .rent-opt-price')?.textContent||'';
   alert('✅ Redirection Stripe ('+p+')…\nAccès envoyé à : '+email); closeRentModal();
 }
 
-// ── UPLOAD (multi-step) ──
+// UPLOAD
 let currentStep = 0;
 function openUploadModal() { currentStep=0; showStep(0); document.getElementById('upload-modal').classList.add('open'); }
 function closeUploadModal() { document.getElementById('upload-modal').classList.remove('open'); }
@@ -877,12 +852,8 @@ function showStep(n) {
     l.classList.toggle('active', i===n); l.classList.toggle('done', i<n);
   });
 }
-function nextStep() {
-  if (currentStep < 3) { currentStep++; showStep(currentStep); }
-}
-function prevStep() {
-  if (currentStep > 0) { currentStep--; showStep(currentStep); }
-}
+function nextStep() { if (currentStep < 3) { currentStep++; showStep(currentStep); } }
+function prevStep() { if (currentStep > 0) { currentStep--; showStep(currentStep); } }
 function handleFileSelect(e) { const f=e.target.files[0]; if(f) document.getElementById('upload-file-name').textContent='✅ '+f.name; }
 const zone = document.getElementById('upload-zone');
 zone.addEventListener('dragover',e=>{e.preventDefault();zone.style.borderColor='var(--gold)';});
@@ -898,8 +869,8 @@ function toggleAccess(type, cb) {
   const price=document.getElementById('price-'+type);
   if(price) price.classList.toggle('show', cb.checked);
 }
-const API_URL = 'https://phg-akhenaton-backend-production.up.railway.app';
 
+const API_URL = 'https://phg-akhenaton-backend-production.up.railway.app';
 async function submitUpload() {
   const title  = document.getElementById('up-title').value.trim();
   const author = document.getElementById('up-author').value.trim();
@@ -907,26 +878,19 @@ async function submitUpload() {
   if (!title || !author || !email) { alert('Remplissez tous les champs obligatoires (*).'); return; }
   const fileInput = document.getElementById('file-input');
   if (!fileInput.files[0]) { alert('Sélectionnez votre fichier (PDF/EPUB/MOBI).'); return; }
-
   const prog = document.getElementById('upload-progress');
   const fill = document.getElementById('progress-fill');
   const txt  = document.getElementById('progress-text');
-  prog.style.display = 'block';
-  fill.style.width = '10%';
-  txt.textContent = 'Préparation de l\'envoi…';
-
+  prog.style.display = 'block'; fill.style.width = '10%'; txt.textContent = "Préparation de l'envoi…";
   const fd = new FormData();
-  fd.append('fichier',       fileInput.files[0]);
-  fd.append('titre',         title);
-  fd.append('sous_titre',    document.getElementById('up-subtitle').value.trim());
-  fd.append('categorie',     document.getElementById('up-category').value);
-  fd.append('description',   document.getElementById('up-description').value.trim());
-  fd.append('tags',          document.getElementById('up-tags').value.trim());
-  fd.append('auteur',        author);
-  fd.append('biographie',    document.getElementById('up-bio').value.trim());
-  fd.append('email_auteur',  email);
-
-  // Liens auteur
+  fd.append('fichier', fileInput.files[0]); fd.append('titre', title);
+  fd.append('sous_titre', document.getElementById('up-subtitle').value.trim());
+  fd.append('categorie', document.getElementById('up-category').value);
+  fd.append('description', document.getElementById('up-description').value.trim());
+  fd.append('tags', document.getElementById('up-tags').value.trim());
+  fd.append('auteur', author);
+  fd.append('biographie', document.getElementById('up-bio').value.trim());
+  fd.append('email_auteur', email);
   const liens = [];
   document.querySelectorAll('#upload-step-2 .link-row').forEach(row => {
     const type = row.querySelector('select')?.value || '';
@@ -934,81 +898,47 @@ async function submitUpload() {
     if (url) liens.push({ type, url });
   });
   fd.append('liens_auteur', JSON.stringify(liens));
-
-  // Accès & Prix
-  const prixAchat  = document.querySelector('#price-buy input')?.value;
-  const prixLoc    = document.querySelector('#price-rent input')?.value;
-  const gratuit    = document.getElementById('toggle-free')?.classList.contains('on');
-  const externe    = document.querySelector('#price-amazon input')?.value.trim() || '';
-  if (prixAchat) fd.append('prix_achat',    prixAchat);
+  const prixAchat = document.querySelector('#price-buy input')?.value;
+  const prixLoc   = document.querySelector('#price-rent input')?.value;
+  const gratuit   = document.getElementById('toggle-free')?.classList.contains('on');
+  const externe   = document.querySelector('#price-amazon input')?.value.trim() || '';
+  if (prixAchat) fd.append('prix_achat', prixAchat);
   if (prixLoc)   fd.append('prix_location', prixLoc);
-  fd.append('acces_gratuit', gratuit);
-  fd.append('lien_externe',  externe);
-
-  // Progression animée
+  fd.append('acces_gratuit', gratuit); fd.append('lien_externe', externe);
   let p = 10;
   const iv = setInterval(() => {
-    p += Math.random() * 8;
-    if (p > 85) clearInterval(iv);
+    p += Math.random() * 8; if (p > 85) clearInterval(iv);
     fill.style.width = Math.min(p, 85) + '%';
     txt.textContent = 'Envoi en cours… ' + Math.round(Math.min(p, 85)) + '%';
   }, 400);
-
   try {
     const res = await fetch(`${API_URL}/upload/oeuvre`, { method: 'POST', body: fd });
     clearInterval(iv);
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({ detail: 'Erreur serveur' }));
-      throw new Error(err.detail || 'Erreur serveur');
-    }
+    if (!res.ok) { const err = await res.json().catch(() => ({ detail: 'Erreur serveur' })); throw new Error(err.detail || 'Erreur serveur'); }
     const data = await res.json();
-    fill.style.width = '100%';
-    txt.textContent = '✅ ' + data.message;
+    fill.style.width = '100%'; txt.textContent = '✅ ' + data.message;
     setTimeout(closeUploadModal, 3000);
   } catch (err) {
-    clearInterval(iv);
-    fill.style.background = '#c0392b';
-    txt.textContent = '❌ ' + err.message;
+    clearInterval(iv); fill.style.background = '#c0392b'; txt.textContent = '❌ ' + err.message;
   }
 }
 
-
-// ── STRIPE CHECKOUT ──
+// STRIPE
 const BACKEND = 'https://web-production-bca3f.up.railway.app';
-
-const STRIPE_BOOK_IDS = {
-  0: 'zarek-archiviste',
-  1: 'figuier-de-canaan', 
-  2: 'eldorado-ombres',
-  3: 'de-rien-a-la-liberte',
-  4: 'loi-semence',
-  5: 'violence-humaine',
-  6: 'grand-secret',
-  7: 'manifestation-explosion',
-  8: 'afrique-civilisation',
-  9: 'dernier-pauvre-famille'
-};
-
+const STRIPE_BOOK_IDS = { 0:'zarek-archiviste', 1:'figuier-de-canaan', 2:'eldorado-ombres', 3:'de-rien-a-la-liberte', 4:'loi-semence', 5:'violence-humaine', 6:'grand-secret', 7:'manifestation-explosion', 8:'afrique-civilisation', 9:'dernier-pauvre-famille' };
 async function stripeCheckout(bookIndex, mode) {
   const bookId = STRIPE_BOOK_IDS[bookIndex];
   if (!bookId) { alert('Livre introuvable'); return; }
   try {
-    const fd = new FormData();
-    fd.append('book_id', bookId);
-    fd.append('mode', mode);
+    const fd = new FormData(); fd.append('book_id', bookId); fd.append('mode', mode);
     const res = await fetch(BACKEND + '/checkout', { method: 'POST', body: fd });
     const data = await res.json();
-    if (data.checkout_url) {
-      window.location.href = data.checkout_url;
-    } else {
-      alert('Erreur paiement: ' + JSON.stringify(data));
-    }
-  } catch(e) {
-    alert('Erreur connexion: ' + e.message);
-  }
+    if (data.checkout_url) { window.location.href = data.checkout_url; }
+    else { alert('Erreur paiement: ' + JSON.stringify(data)); }
+  } catch(e) { alert('Erreur connexion: ' + e.message); }
 }
 
-// ── REVIEWS ──
+// REVIEWS
 const SAMPLE_REVIEWS = {
   0: [
     { name:"Kouamé A.", stars:5, date:"Juin 2026", text:"Un roman stratégique hors du commun. Les 48 lois sont distillées avec une précision chirurgicale dans une fiction épique. Je l'ai relu deux fois.", verified:true },
@@ -1024,36 +954,27 @@ const SAMPLE_REVIEWS = {
     { name:"Christelle O.", stars:4, date:"Mai 2026", text:"Bouleversant. L'auteur ne mâche pas ses mots et c'est ce qui rend ce livre si puissant.", verified:true }
   ]
 };
-// Default sample for books without specific reviews
-const DEFAULT_REVIEWS = [
-  { name:"Lecteur PHG", stars:5, date:"Juin 2026", text:"Une œuvre de qualité qui mérite d'être lue. Frédéric Goulia a encore une fois livré quelque chose d'exceptionnel.", verified:true }
-];
+const DEFAULT_REVIEWS = [{ name:"Lecteur PHG", stars:5, date:"Juin 2026", text:"Une œuvre de qualité qui mérite d'être lue. Frédéric Goulia a encore une fois livré quelque chose d'exceptionnel.", verified:true }];
 
 let currentBookIndex = 0;
 let selectedStar = 0;
-let userReviews = {}; // stored per book index
+let userReviews = {};
 
 function starsHtml(n) { return '⭐'.repeat(n) + '☆'.repeat(5-n); }
-
 function renderReviews(i) {
   const base = SAMPLE_REVIEWS[i] || DEFAULT_REVIEWS;
   const extra = userReviews[i] || [];
   const all = [...extra, ...base];
   const total = all.length;
   const avg = total ? (all.reduce((s,r)=>s+r.stars,0)/total).toFixed(1) : '—';
-
   document.getElementById('rev-score').textContent = avg;
   document.getElementById('rev-stars').textContent = avg >= 1 ? starsHtml(Math.round(parseFloat(avg))) : '—';
-  document.getElementById('rev-count').textContent = total + (total > 1 ? ' avis' : ' avis');
-
-  // bars
+  document.getElementById('rev-count').textContent = total + ' avis';
   const counts = [5,4,3,2,1].map(s => all.filter(r=>r.stars===s).length);
   document.getElementById('rev-bars').innerHTML = [5,4,3,2,1].map((s,idx) => {
     const pct = total ? Math.round(counts[idx]/total*100) : 0;
     return `<div class="bar-row"><span class="bar-label">${s}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="bar-pct">${pct}%</span></div>`;
   }).join('');
-
-  // list
   document.getElementById('review-list').innerHTML = all.map(r => `
     <div class="review-item">
       <div class="review-header">
@@ -1064,8 +985,6 @@ function renderReviews(i) {
       ${r.verified ? '<div class="review-verified">✔ Achat vérifié</div>' : ''}
     </div>
   `).join('');
-
-  // reset form
   selectedStar = 0;
   document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('rev-name').value = '';
@@ -1073,25 +992,23 @@ function renderReviews(i) {
   document.getElementById('review-success').style.display = 'none';
   document.getElementById('review-form').style.display = 'block';
 }
-
 function pickStar(n) {
   selectedStar = n;
   document.querySelectorAll('.star-btn').forEach(b => b.classList.toggle('active', parseInt(b.dataset.v) <= n));
 }
-
 function submitReview() {
   const name = document.getElementById('rev-name').value.trim();
   const text = document.getElementById('rev-text').value.trim();
   if (!name || !text) { alert('Veuillez remplir votre prénom et votre avis.'); return; }
   if (!selectedStar) { alert('Veuillez choisir une note (étoiles).'); return; }
   if (!userReviews[currentBookIndex]) userReviews[currentBookIndex] = [];
-  userReviews[currentBookIndex].unshift({ name, stars: selectedStar, date: 'Aujourd\'hui', text, verified: false });
+  userReviews[currentBookIndex].unshift({ name, stars: selectedStar, date: "Aujourd'hui", text, verified: false });
   renderReviews(currentBookIndex);
   document.getElementById('review-form').style.display = 'none';
   document.getElementById('review-success').style.display = 'block';
 }
 
-// ── CLOSE ON OVERLAY ──
+// CLOSE ON OVERLAY CLICK
 ['desc-modal','rent-modal','upload-modal'].forEach(id=>{
   document.getElementById(id).addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
 });
